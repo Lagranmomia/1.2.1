@@ -1,0 +1,161 @@
+?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+
+<item>
+<title>[COLOR red][/COLOR][COLOR red]                     [COLOR red][B]MONGOLIA[/B][/COLOR][I][COLOR white] un add-on Totalmente Gratuito Y sin Donaciones[/I][/COLOR]</title>
+<externallink>na</externallink>
+<link>NA</link>
+<thumbnail>https://github.com/danvalbel/regex/blob/master/mongolia.png?raw=true</thumbnail>
+<fanart>https://github.com/danvalbel/regex/blob/master/Imagen3.jpg?raw=true</fanart>
+<info>MONGOLIA</info>
+</item>
+
+
+<item>
+<title>[COLOR yellow] »»» [/COLOR][COLOR lime]Soluciones de Problemas[/COLOR] [COLOR yellow]««« [/COLOR]</title>
+<link>$doregex[text]</link>
+<regex>
+<name>text</name>
+<expres><![CDATA[#$pyFunction
+def GetLSProData(page_data,Cookie_Jar,m):
+    import xbmcgui
+    dialog = xbmcgui.Dialog()
+    dialog.textviewer('Mongolia - Soluciones', '\n[COLOR lime][B]Primero[/B][/COLOR] : Si da error al entrar en alguna sección, no te preocupes, pulsación larga para android o clic derecho en el pc, ir a [B]AJUSTES[/B], pulsas por [B]DEFECTO[/B] y luego a [B]OK[/B] \n[COLOR lime][B]Segundo[/B][/COLOR] : Para poder Reproducir las películas en el Buscador GranTorrent es necesario Instalar [B]QUASAR[/B] en el caso de que se paren las peliculas, dejar 5 minutos cargando. \n[COLOR lime][B]Tercero[/B][/COLOR] : Para Reproducir los canales de televisión Necesitas tener Instalado los scrips [B]F4mProxi Y F4mTester[/B] en el caso de que salte un mensaje de registro, cambiar de servidor, este puede que esté caido. \n Muchas Gracias y a disfrutar y si teneis alguna sugerencia el telegram @mongoliakodi')
+]]></expres>
+<page></page>
+</regex>
+<thumbnail>http://www.pcsolucion.com.mx/images/Soluciones.png</thumbnail>
+<fanart>https://github.com/danvalbel/regex/blob/master/Imagen3.jpg?raw=true</fanart>
+</item>
+
+
+<item>
+<title>[COLOR white][B]+ Películas[/B][/COLOR]</title>
+<link>http://ignorame</link><thumbnail>https://github.com/Lagranmomia/banderas/blob/master/peliculas.png?raw=true</thumbnail>
+<fanart>https://github.com/danvalbel/regex/blob/master/Imagen3.jpg?raw=true</fanart>
+<externallink>https://raw.githubusercontent.com/danvalbel/prueba/master/grantorrent</externallink>
+</item>
+
+<item>
+<title>[COLOR white][B]+ Series de Tv[/B][/COLOR]</title>
+<link>http://ignorame</link><thumbnail>https://github.com/Lagranmomia/banderas/blob/master/Series.png?raw=true</thumbnail>
+<fanart>https://github.com/danvalbel/regex/blob/master/Imagen3.jpg?raw=true</fanart>
+<externallink>https://raw.githubusercontent.com/danvalbel/prueba/master/series1</externallink>
+<info>Los mejores multicanales para ver eventos Deportivos.</info>
+</item>
+
+
+<item>
+<title>[COLOR white][B]+ Series Anime[/B][/COLOR]</title>
+<link>http://ignorame</link>
+<externallink>http://oqefuh.blogspot.com.es/p/mundo-anime.html</externallink>
+<thumbnail>https://github.com/Lagranmomia/regex/blob/master/mundo%20anime.png?raw=true</thumbnail>
+<fanart>https://github.com/danvalbel/regex/blob/master/Imagen3.jpg?raw=true</fanart>
+</item>
+
+
+<item>
+<title>[COLOR white][B]+ Documentales[/B][/COLOR]</title>
+<link>http://ignorame</link><thumbnail>https://github.com/Lagranmomia/banderas/blob/master/documentales.png?raw=true</thumbnail>
+<fanart>https://github.com/danvalbel/regex/blob/master/Imagen3.jpg?raw=true</fanart>
+<externallink>https://raw.githubusercontent.com/danvalbel/prueba/master/documentales</externallink>
+</item>
+
+
+
+<item>
+<title>[COLOR white][B]+ TV España[/B][/COLOR]</title>
+<link>http://ignorame</link><thumbnail>https://github.com/Lagranmomia/banderas/blob/master/Tv%20Espa%C3%B1a.png?raw=true</thumbnail>
+<fanart>https://github.com/danvalbel/regex/blob/master/Imagen3.jpg?raw=true</fanart>
+<externallink>https://pastebin.com/raw/5SYkwaP4</externallink>
+</item>
+
+
+
+<item>
+<title>[COLOR white][B]+ TV del Mundo [/B][/COLOR][COLOR lime] + de 80 Paises [/COLOR] </title>
+<link>http://ignorame</link><thumbnail>https://github.com/Lagranmomia/banderas/blob/master/tv%20del%20mundo.png?raw=true</thumbnail>
+<fanart>https://github.com/danvalbel/regex/blob/master/Imagen3.jpg?raw=true</fanart>
+<externallink>http://oqefuh.blogspot.com.es/p/tv-maxico-y-latinos.html</externallink>
+</item>
+
+<item>
+<title>[B][COLOR white]+ Playlist Listas Diarias[/COLOR][/B]</title>
+<link>$doregex[makelist3]</link>
+<regex>
+<name>makelist3</name>
+<listrepeat><![CDATA[
+ <SetViewMode>55</SetViewMode>
+ <title>[COLOR red][B]Mongolia [makelist3.param1][/COLOR][/B][COLOR skyblue][makelist3.param2][/COLOR]</title>
+<link>$doregex[makelist2]</link>
+ <thumbnail></thumbnail>
+ <fanart></fanart>
+ ]]></listrepeat>
+<expres><![CDATA[fnChangeTab\(event\)">(.*?\/10\/2017)<|http(.*?)\/g.*?name=(.*?)\&.*?ssword=(.*?)\&]]></expres>
+<page>http://www.m3uliste.pw/</page>
+</regex>
+ 
+<regex>
+<name>makelist2</name>
+<listrepeat><![CDATA[
+ <SetViewMode>55</SetViewMode>
+ <title>User: [COLOR red]Mongolia[makelist3.param3][/COLOR]  |  Status: [COLOR red][makelist2.param1][/COLOR] |  Max connessioni:[COLOR yellow][makelist2.param2] [/COLOR] </title>
+ <link>NA</link>
+ <externallink>http[makelist3.param2]/get.php?username=[makelist3.param3]&amp;password=[makelist3.param4]&amp;type=m3u$$TSDOWNLOADER$$</externallink>
+ <thumbnail></thumbnail>
+ <fanart></fanart>
+ ]]></listrepeat>
+<expres>status":"(.*?)".*max_connections":"(.*?)",</expres>
+<page>http[makelist3.param2]/panel_api.php?username=[makelist3.param3]&amp;password=[makelist3.param4]</page>
+</regex>
+<thumbnail>/thumbnail>
+<fanart></fanart>
+</item>
+
+<item>
+<title>[COLOR white][B]+ Television 24/7 [/B][/COLOR] </title>
+<link>http://ignorame</link><thumbnail>https://github.com/Lagranmomia/banderas/blob/master/24_7.png?raw=true</thumbnail>
+<fanart>https://github.com/danvalbel/regex/blob/master/Imagen3.jpg?raw=true</fanart>
+<externallink>https://raw.githubusercontent.com/danvalbel/prueba/master/Television%2024</externallink>
+</item>
+	
+	
+<item>
+<title>[COLOR white][B]+ Entretenimiento[/B][/COLOR] </title>
+<link>http://ignorame</link><<thumbnail></thumbnail>
+<fanart>https://github.com/danvalbel/regex/blob/master/Imagen3.jpg?raw=true</fanart>
+<externallink>http://bit.ly/2C3y8aE</externallink>
+</item>
+
+
+<item>
+<title>[COLOR white][B]+ Z O N A  A D U L T O S[/B][/COLOR]</title>
+<link>$doregex[makelist]</link>
+<regex>
+  <name>makelist</name>
+  <listrepeat><![CDATA[
+        <title>[COLOR white][B][makelist.param2][/B][/COLOR]</title>
+        <link>$doregex[makelist2]</link>
+]]></listrepeat>
+<expres><![CDATA[<a href="(\/tags.+?)"><b>(.+?)<\/b><span]]></expres>
+<page>http://www.xvideos.com/tags</page>
+<cookieJar></cookieJar>
+</regex>
+<regex>
+  <name>makelist2</name>
+  <listrepeat><![CDATA[
+        <title>[B][COLOR hotpink][makelist2.param3][/COLOR][/B]</title>
+        <link>$doregex[getsrcadult]</link>
+        <thumbnail>[makelist2.param2]</thumbnail>
+]]></listrepeat>
+<expres><![CDATA[div id.+<a href="(.+?)".+img src="(.+?)".+title="(.+?)">]]></expres>
+<page>http://www.xvideos.com[makelist.param1]</page>
+<cookieJar></cookieJar>
+</regex>
+<regex>
+<name>getsrcadult</name>
+<expres><![CDATA[setVideoUrlHigh\('(.+?)'\)]]></expres>
+<page>http://www.xvideos.com[makelist2.param1]</page>
+</regex>
+<thumbnail>https://irorszagimagyarok.eu/wp-content/uploads/2017/04/18e8f05813e21f868ae4b92de9fd0bef.png</thumbnail>
+</item>

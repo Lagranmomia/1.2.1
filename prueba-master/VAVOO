@@ -1,0 +1,41 @@
+<item>
+<title>VAVOO</title>
+<link>$doregex[makelist]</link>
+<regex>
+<name>makelist</name>
+<listrepeat><![CDATA[
+<title>[COLOR gold][makelist.param1][/COLOR] ([makelist.param2])</title>
+<link>[makelist.param3]?n=1&b=|User-Agent=VAVOO/1.51&amp;Referer=https://vjackson.info/</link>
+]]></listrepeat>
+<expres><![CDATA[tvg-name="(.*?)".+?"(.*?)".*\n(.*)]]></expres>
+<page>https://vjackson.info/live/index</page>
+</regex>
+</item>
+ 
+<item>
+<title>VAVOO - 2 Countries</title>
+<link>$doregex[makelist]</link>
+<regex>
+<name>makelist</name>
+<listrepeat><![CDATA[
+<title>[COLOR gold][makelist.param1][/COLOR] ([makelist.param2])</title>
+<link>[makelist.param3]?n=1&b=|User-Agent=VAVOO/1.51&amp;Referer=https://vjackson.info/</link>
+]]></listrepeat>
+<expres><![CDATA[tvg-name="(.*?)".+?"((?:Germany|United Kingdom))".*\n(.*)]]></expres>
+<page>https://vjackson.info/live/index</page>
+</regex>
+</item>
+ 
+<item>
+<title>VAVOO - 1 Country</title>
+<link>$doregex[makelist]</link>
+<regex>
+<name>makelist</name>
+<listrepeat><![CDATA[
+<title>[COLOR gold][makelist.param1][/COLOR]</title>
+<link>[makelist.param2]?n=1&b=|User-Agent=VAVOO/1.51&amp;Referer=https://vjackson.info/</link>
+]]></listrepeat>
+<expres><![CDATA[tvg-name="(.*?)".+?Germany.*\n(.*)]]></expres>
+<page>https://vjackson.info/live/index</page>
+</regex>
+</item>

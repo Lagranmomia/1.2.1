@@ -1,0 +1,686 @@
+<item>
+<title>[B][COLOR yellow] »»» [/COLOR][COLOR lime] PELICULAS MONGOLIA[/COLOR] [COLOR yellow]««« [/COLOR][/B]</title>
+<thumbnail></thumbnail>
+<fanart></fanart>
+<link>http://oqefuh.blogspot.com.es</link>
+<externallink>http://oqefuh.blogspot.com.es</externallink>
+</item>
+
+<item>
+<title>[COLOR white]+[/COLOR][COLOR lime][B] Buscador [/B] [/COLOR][COLOR white] GranTorrent [/COLOR] [COLOR yellow] Castellano[/COLOR] </title>
+<link>$doregex[makelist2]</link>
+ 
+ 
+<regex>
+<name>makelist2</name>
+<listrepeat><![CDATA[
+ <SetViewMode>55</SetViewMode>
+ <title>[COLOR skyblue][UPPERCASE][B] [makelist2.param3][/B][/UPPERCASE][/COLOR]  </title>
+<link>$doregex[makelist]</link>
+<thumbnail>[makelist2.param2]</thumbnail>
+</regex>
+]]></listrepeat>
+<expres><![CDATA[imagen-post[\w\W\s]{0,8}href="(.*?)"[\w\W\s]{0,7}src="(.*?)"[\w\W\s]{0,400}bloque-inferior">\n(.*?)<]]></expres>
+<page>https://grantorrent.com/?s=$doregex[search]</page>   
+</regex>
+ 
+ 
+ 
+ 
+ 
+<regex>
+<name>search</name>
+<expres><![CDATA[#$pyFunction
+import xbmc
+import xbmcaddon
+import xbmcgui
+def GetLSProData(page_data,Cookie_Jar,m):
+    dialog = xbmcgui.Dialog()
+    d = dialog.input('Buscar Pelicula: ejemplo: Batman', type=xbmcgui.INPUT_ALPHANUM).replace(" ", "+")
+    return d
+]]></expres>
+<page></page>
+<cookieJar></cookieJar>
+</regex>
+ 
+ 
+ 
+<regex>
+<name>makelist</name>
+<listrepeat><![CDATA[
+ <SetViewMode>55</SetViewMode>
+ <title>[COLOR skyblue][UPPERCASE][B] [makelist2.param3][/B][/UPPERCASE][/COLOR]  Calidad:[makelist.param2]  Tamaño:[makelist.param3]  </title>
+<link>plugin://plugin.video.quasar/play?uri=[makelist.param4]</link>
+<thumbnail>[makelist2.param2]</thumbnail>
+</regex>
+]]></listrepeat>
+<expres><![CDATA[alt="(.*?)".*?\/td><td>(.*?)<[\w\W\s]{0,7}td>(.*?)<[\w\W\s]{0,25}href="(.*?torrent)"]]></expres>
+<page>[makelist2.param1]</page>
+</regex>
+<thumbnail></thumbnail>
+<info>[B][COLOR skyblue]Peliculas de https://grantorrent.com en Castellano[/COLOR]</info>
+</item>
+
+<item>
+<title>[COLOR white]+[/COLOR][COLOR lime][B] Buscador [/B] [/COLOR][COLOR white]de Pelicula en [/COLOR][COLOR yellow]Diskokosmiko[/COLOR]</title>
+
+<link>$doregex[lista]</link>
+ 
+<regex>
+<name>lista</name>
+  <listrepeat><![CDATA[
+         
+         <title>$pyFunction:'[lista.param3]'.replace(".mp4", " ").replace(".avi", " ").replace(".mkv", " ")</title>
+        <link>$doregex[getUrl]</link>
+        <thumbnail>/thumbnail>
+        ]]></listrepeat>
+<expres><![CDATA[href=\"(.*?,(.*?)\..*?)\".*?preview">(.*?mkv|.*?mp4|.*?avi)<]]><expres>
+<page>http://diskokosmiko.mx/action/SearchFiles?Phrase=Blackghost&amp;Mode=List&amp;Type=Video&amp;SizeFromMB=0&amp;SizeToMB=0&amp;pageNumber=10</page>
+<rawpost>Phrase=$doregex[search]&__RequestVerificationToken=$doregex[tok]</rawpost>
+<referer>http://diskokosmiko.mx/action/SearchFiles</referer>
+<connection>keep-alive</connection>
+<accept>*/*</accept>
+<X-Req>XMLHttpRequest</X-Req>
+<cookieJar>d248aa4e1e697a53b195098a52759e8d21507325199</cookieJar>
+</regex>
+ 
+ 
+ 
+<regex>
+<name>search</name>
+<expres><![CDATA[#$pyFunction
+import xbmc
+import xbmcaddon
+import xbmcgui
+def GetLSProData(page_data,Cookie_Jar,m):
+    dialog = xbmcgui.Dialog()
+    d = dialog.input('Nombre de la Pelicula:', type=xbmcgui.INPUT_ALPHANUM).replace(" ", "+")
+    return d
+]]></expres>
+<page></page>
+<cookieJar></cookieJar>
+</regex>
+
+
+<regex>
+<name>tok</name>
+<expres>DownloadFile.*RequestVerificationToken.*?value="([^"]+)<expres>
+<page>http://diskokosmiko.mx/[lista.param1]</page>
+<referer>http://diskokosmiko.mx/</referer>
+<connection>keep-alive</connection>
+<cookieJar></cookieJar>
+</regex>
+ 
+ 
+ 
+<regex><name>getUrl</name>
+<expres><![CDATA[#$pyFunction
+import re , requests ,json
+def GetLSProData(page_data,Cookie_Jar,m):
+ 
+ ref = 'http://diskokosmiko.mx/'
+ url='http://diskokosmiko.mx[lista.param1]'
+ headers = {'User-Agent': 'Mozilla/5.0 (X11; Linux i686; rv:42.0) Gecko/20100101 Firefox/42.0 Iceweasel/42.0', 'Referer': ref ,
+            'X-Requested-With' : 'XMLHttpRequest' , 'Accept' : '*/*'}
+ session = requests.Session()
+ r = session.get(url, headers=headers)
+ rv1 = r.cookies
+ 
+ vfile , vtoken = re.findall('action/DownloadFile.*?fileId.*?value="(.*?)".*?Token".*?value="(.*?)"', r.text)[0]
+ data_a ={'fileId': vfile , '__RequestVerificationToken': vtoken}
+ nr = requests.post('http://diskokosmiko.mx/action/DownloadFile?location=fi&f=%s'%vfile , headers=headers,cookies=rv1 , data=data_a).text
+ nrj=json.loads(nr)
+ nr = nrj['Content']
+ r2 = re.findall(r'(?s)value=\"(.*?)\"', nr)[0]
+ data_a ={'__RequestVerificationToken': r2 , 'Username': 'josele89' , 'Password' : 'josele89'}
+ nr1 = requests.post('http://diskokosmiko.mx/action/Account/Login', headers=headers,cookies = rv1 , data=data_a)
+ print nr1.headers['Set-Cookie']
+ rasp = re.findall('ASPXAUTH_v2=(.*?);', nr1.headers['Set-Cookie'])[0]
+ rv1['.ASPXAUTH_v2'] = rasp
+ data_a ={'fileId': vfile , '__RequestVerificationToken': vtoken}
+ nr3 = requests.post('http://diskokosmiko.mx/action/DownloadFile?location=fi&f=%s'%vfile , headers=headers, cookies = rv1 , data=data_a).text
+ r3 = re.findall('DownloadUrl":"(.*?)"', nr3)[0]
+ print r3
+ return r3
+]]></expres>
+<page></page>
+<cookieJar></cookieJar>
+</regex>
+ 
+<regex>
+<name>tok2</name>
+<expres>DownloadFile.*RequestVerificationToken.*?value="([^"]+)<expres>
+<page>http://diskokosmiko.mx[lista.param1]</page>
+<referer>http://diskokosmiko.mx/</referer>
+<connection>keep-alive</connection>
+<cookieJar></cookieJar>
+</regex>
+<thumbnail></thumbnail>
+</item>
+
+
+<item>
+<title>[B][COLOR white]+[/COLOR][COLOR lime] 7.213[/COLOR][COLOR red]-[/COLOR][COLOR white]PELICULAS[/COLOR][/B]</title>
+<thumbnail></thumbnail>
+<fanart></fanart>
+<link>$doregex[makelist]</link>
+<externallink>http://oqefuh.blogspot.com.es/p/peliculas-alfabeticamente-menu.html</externallink>
+</item>
+
+
+<item>
+<title>       </title>
+<thumbnail></thumbnail>
+<fanart></fanart>
+<link>http://oqefuh.blogspot.com.es</link>
+<externallink>http://oqefuh.blogspot.com.es</externallink>
+</item>
+
+<item>
+<title>[B][COLOR yellow] »»» [/COLOR][COLOR lime] Algunas películas[/COLOR] [COLOR yellow]««« [/COLOR][/B]</title>
+<thumbnail></thumbnail>
+<fanart></fanart>
+<link>http://oqefuh.blogspot.com.es</link>
+<externallink></externallink>
+</item>
+
+<item>
+<title>50 PRIMERAS CITAS</title>
+<thumbnail>https://pics.filmaffinity.com/50_first_dates-691881778-large.jpg</thumbnail>
+<fanart></fanart>
+<link>http://streamcloud.eu/ygokf0jlct0x</link>
+<externallink></externallink>
+</item>
+
+<item>
+<title>CINCUENTA SOMBRAS DE GREY</title>
+<thumbnail>http://is1.mzstatic.com/image/thumb/Video7/v4/a3/bc/dc/a3bcdc4d-9304-ee13-5359-75557ccf3d22/source/227x227bb.jpg</thumbnail>
+<fanart></fanart>
+<link>http://streamcloud.eu/rb14384b6zen</link>
+<externallink></externallink>
+</item>
+
+
+<item>
+<title>CINCUENTA SOMBRAS MAS OSCURAS</title>
+<thumbnail>http://www.movistarplus.es/recorte/n/caratula4/F3341822</thumbnail>
+<fanart></fanart>
+<link>http://streamcloud.eu/vg8xthenxmn9</link>
+<externallink></externallink>
+</item>
+
+
+<item>
+<title>CRAZY. STUPID. LOVE</title>
+<thumbnail>https://pics.filmaffinity.com/crazy_stupid_love-813652973-large.jpg</thumbnail>
+<fanart></fanart>
+<link>http://streamcloud.eu/s4iuhs2qnhov</link>
+<externallink></externallink>
+</item>
+
+<item>
+<title>DIME CON CUANTOS</title>
+<thumbnail>https://pics.filmaffinity.com/crazy_stupid_love-813652973-large.jpg</thumbnail>
+<fanart></fanart>
+<link>https://openload.co/f/Keml8OpQzds/Dime.Con.Cuantos_%5Bwww.DNPelis.Com%5D.avi.mp4</link>
+<externallink></externallink>
+</item>
+
+<item>
+<title>EL DIARIO DE BRIDGET JONES</title>
+<thumbnail>https://www.ecartelera.com/carteles/6900/6911/001_p.jpg</thumbnail>
+<fanart></fanart>
+<link>http://streamcloud.eu/iqdfjzskehah</link>
+<externallink></externallink>
+</item>
+
+
+<item>
+<title>EL DIARIO DE BRIDGET JONES: SOBREVIVIRE</title>
+<thumbnail>http://2.bp.blogspot.com/-BFkkEFGU-zU/UVub-PbZsVI/AAAAAAAAHho/QRUCn-d5fCw/s320/sobrevivire+bj.jpg</thumbnail>
+<fanart></fanart>
+<link>http://streamcloud.eu/qmxy6tlnn5f0</link>
+<externallink></externallink>
+</item>
+
+
+<item>
+<title>BRIDGET JONES BABY</title>
+<thumbnail>https://i.ytimg.com/vi/BvN4ank0zg8/movieposter.jpg</thumbnail>
+<fanart></fanart>
+<link>http://streamcloud.eu/hzlu6lezhzqh</link>
+<externallink></externallink>
+</item>
+
+<item>
+<title>EL DIARIO DE NOA</title>
+<thumbnail>https://pics.filmaffinity.com/the_notebook-565006977-large.jpg</thumbnail>
+<fanart></fanart>
+<link>https://openload.co/f/zPqXbCKUPBs/El_diario_de_Noa_%5BDNATHARIX%5D.avi.mp4</link>
+<externallink></externallink>
+</item>
+
+<item>
+<title>POSDATA: TE QUIERO</title>
+<thumbnail>https://pics.filmaffinity.com/p_s_i_love_you-191794084-large.jpg</thumbnail>
+<fanart></fanart>
+<link>http://streamcloud.eu/xe4ljj0y7x1e</link>
+<externallink></externallink>
+</item>
+
+
+<item>
+<title>PRETTY WOMAN</title>
+<thumbnail>http://hotcountry1035.com/wp-content/uploads/2017/03/pretty.jpg</thumbnail>
+<fanart></fanart>
+<link>http://streamcloud.eu/2z4z5mdn6gw8</link>
+<externallink></externallink>
+</item>
+
+
+<item>
+<title>QUE ESPERAR CUANDO ESTAS ESPERANDO</title>
+<thumbnail>https://pics.filmaffinity.com/what_to_expect_when_you_re_expecting-209066971-large.jpg</thumbnail>
+<fanart></fanart>
+<link>http://streamcloud.eu/81ca2mt6t1op</link>
+<externallink></externallink>
+</item>
+
+<item>
+<title>TRES METROS SOBRE EL CIELO</title>
+<thumbnail>https://images-na.ssl-images-amazon.com/images/I/91qPgmBEcIL.jpg</thumbnail>
+<fanart></fanart>
+<link>http://streamcloud.eu/rqvww3afgocr</link>
+<externallink></externallink>
+</item>
+
+<item>
+<title>TENGO GANAS DE TI</title>
+<thumbnail>http://es.web.img3.acsta.net/c_300_300/medias/nmedia/18/85/52/84/20014763.jpg</thumbnail>
+<fanart></fanart>
+<link>http://streamcloud.eu/643ni5eq8zuv</link>
+<externallink></externallink>
+</item>
+
+
+<item>
+<title>TITANIC</title>
+<thumbnail>https://pics.filmaffinity.com/titanic-321994924-large.jpg</thumbnail>
+<fanart></fanart>
+<link>https://openload.co/f/KiKYm4bQfbc/Titanic%23Unknown_Code.mkv.mp4</link>
+<externallink></externallink>
+</item>
+
+
+<item>
+<title>30 DIAS DE OSCURIDAD</title>
+<thumbnail>https://pics.filmaffinity.com/30_days_of_night-647855523-large.jpg</thumbnail>
+<fanart></fanart>
+<link>http://streamcloud.eu/7xbm6r14ys77</link>
+<externallink></externallink>
+</item>
+
+<item>
+<title>30 DIAS DE OSCURIDAD 2: TINIEBLAS</title>
+<thumbnail>http://4.bp.blogspot.com/-wIxNJF7KmNQ/Vdcwg40ZvWI/AAAAAAAAbuI/MEh5clsxFPc/s320/30.dias.oscuridad.2.png</thumbnail>
+<fanart></fanart>
+<link>http://streamcloud.eu/zh3wqkbnk4a2</link>
+<externallink></externallink>
+</item>
+
+<item>
+<title>DEJAME SALIR</title>
+<thumbnail>http://www.fotogramas.es/var/ezflow_site/storage/images/peliculas/dejame-salir/130429920-1-esl-ES/Dejame-salir.jpg</thumbnail>
+<fanart></fanart>
+<link>http://streamcloud.eu/glcdzquiwnop</link>
+<externallink></externallink>
+</item>
+
+
+<item>
+<title>EL RITO</title>
+<thumbnail>http://es.web.img3.acsta.net/c_215_290/pictures/16/02/23/17/48/300966.jpg</thumbnail>
+<fanart></fanart>
+<link>http://streamcloud.eu/v20fnjtdw415</link>
+<externallink></externallink>
+</item>
+
+
+<item>
+<title>EL SEXTO SENTIDO</title>
+<thumbnail>https://pics.filmaffinity.com/the_sixth_sense-516003703-large.jpg</thumbnail>
+<fanart></fanart>
+<link>http://streamcloud.eu/2keq38ah0f2z</link>
+<externallink></externallink>
+</item>
+
+<item>
+<title>EL ULTIMO EXORCISMO</title>
+<thumbnail>http://www.fotogramas.es/var/ezflow_site/storage/images/peliculas/el-ultimo-exorcismo/4195128-1-esl-ES/El-ultimo-exorcismo.jpg</thumbnail>
+<fanart></fanart>
+<link>http://streamcloud.eu/n7t8tgw2ldnt</link>
+<externallink></externallink>
+</item>
+
+<item>
+<title>EL ULTIMO EXORCISMO 2</title>
+<thumbnail>https://3.bp.blogspot.com/-HfVnlUgW0zA/Uag89WvWQ-I/AAAAAAAAGGs/u08YGSoIRl0/s1600/El+%25C3%259Altimo+Exorcismo+Parte+II.jpg</thumbnail>
+<fanart></fanart>
+<link>http://streamcloud.eu/1bdy57fgey5h</link>
+<externallink></externallink>
+</item>
+
+
+<item>
+<title>HELLION: EL ANGEL CAIDO</title>
+<thumbnail>http://www.fotogramas.es/var/ezflow_site/storage/images/peliculas/hellion-el-angel-caido/2115085-1-esl-ES/Hellion-El-angel-caido.jpg</thumbnail>
+<fanart></fanart>
+<link>http://streamcloud.eu/j7yohifa64fy</link>
+<externallink></externallink>
+</item>
+
+
+<item>
+<title>LA HUERFANA</title>
+<thumbnail>https://pics.filmaffinity.com/orphan_the_orphan-466855209-large.jpg</thumbnail>
+<fanart></fanart>
+<link>http://streamcloud.eu/y4gxmry647hb</link>
+<externallink></externallink>
+</item>
+
+<item>
+<title>LA MUJER DE NEGRO</title>
+<thumbnail>http://es.web.img3.acsta.net/c_215_290/medias/nmedia/18/86/73/78/20019175.jpg</thumbnail>
+<fanart></fanart>
+<link>http://streamcloud.eu/rgm764go3psq</link>
+<externallink></externallink>
+</item>
+
+<item>
+<title>LA MUJER DE NEGRO: EL ANGEL DE LA MUERTE</title>
+<thumbnail>http://www.fotogramas.es/var/ezflow_site/storage/images/peliculas/la-mujer-de-negro-el-angel-de-la-muerte/22781948-1-esl-ES/La-mujer-de-negro-El-angel-de-la-muerte.jpg</thumbnail>
+<fanart></fanart>
+<link>http://streamcloud.eu/dz35bsl7yy78</link>
+<externallink></externallink>
+</item>
+
+
+<item>
+<title>LA SEMILLA DEL MAL</title>
+<thumbnail>https://images-na.ssl-images-amazon.com/images/I/51DVdCO3IHL.jpg</thumbnail>
+<fanart></fanart>
+<link>http://streamcloud.eu/lsganl0tfwwp</link>
+<externallink></externallink>
+</item>
+
+
+<item>
+<title>LIBRANOS DEL MAL</title>
+<thumbnail>http://allcalidad.com/wp-content/uploads/2016/04/1-88.jpg</thumbnail>
+<fanart></fanart>
+<link>https://openload.co/f/1OfHRsbbkbs/Libranos_del_Mal_%282014%29%5BMicroHD-1080p%5D_%281%29.mkv.mp4</link>
+<externallink></externallink>
+</item>
+
+<item>
+<title>LOS OJOS DEL MAL (SEE NO EVIL)</title>
+<thumbnail>http://allcalidad.com/wp-content/uploads/2016/04/1-79.jpg</thumbnail>
+<fanart></fanart>
+<link>http://streamcloud.eu/qgf2l3c3tgk7</link>
+<externallink></externallink>
+</item>
+
+<item>
+<title>MAMA</title>
+<thumbnail>https://resizing.flixster.com/AwFCzsylIFGEdUuHCNAElnugKx0=/206x305/v1.bTsxMTE3MDYxNjtqOzE3NzI0OzEyMDA7ODAwOzEyMDA</thumbnail>
+<fanart></fanart>
+<link>http://streamcloud.eu/q3k3pyfo7opt</link>
+<externallink></externallink>
+</item>
+
+
+<item>
+<title>NUNCA DIGAS SU NOMBRE</title>
+<thumbnail>http://cines.com.py/images/dinamico/peliculas/1872/afiche/nunca-digas-su-nombre-poster-empeliculados.co_.jpg</thumbnail>
+<fanart></fanart>
+<link>https://openload.co/f/jrgNTkckCqI/n0.d1gas.m1080p.TEAMSPAIN.mkv.mp4</link>
+<externallink></externallink>
+</item>
+
+
+<item>
+<title>PESADILLA EN ELM STREET (EL ORIGEN)</title>
+<thumbnail>https://pics.filmaffinity.com/a_nightmare_on_elm_street-511303390-large.jpg</thumbnail>
+<fanart></fanart>
+<link>http://streamcloud.eu/in1ndemvzphq</link>
+<externallink></externallink>
+</item>
+
+<item>
+<title>RETRATOS DEL MAS ALLA</title>
+<thumbnail>http://www.detodoexpres.com/fotos/retratos_del_mas_alla_shutter-2589-1.jpg</thumbnail>
+<fanart></fanart>
+<link>http://streamcloud.eu/gufuerqpvs9s</link>
+<externallink></externallink>
+</item>
+
+<item>
+<title>SINISTER</title>
+<thumbnail>https://pics.filmaffinity.com/sinister-127255424-large.jpg</thumbnail>
+<fanart></fanart>
+<link>http://streamcloud.eu/d2mfmlrtx4mo</link>
+<externallink></externallink>
+</item>
+
+
+<item>
+<title>SINISTER 2</title>
+<thumbnail>https://ia.media-imdb.com/images/M/MV5BMjM3MTQ5NjA0OV5BMl5BanBnXkFtZTgwMzg2OTYyNTE@._V1_UX182_CR0,0,182,268_AL_.jpg</thumbnail>
+<fanart></fanart>
+<link>http://streamcloud.eu/f19cxfktadek</link>
+<externallink></externallink>
+</item>
+
+
+<item>
+<title>EXPEDIENTE WARREN: THE CONJURING</title>
+<thumbnail>http://www.fotogramas.es/var/ezflow_site/storage/images/peliculas/expediente-warren-the-conjuring/6548442-2-esl-ES/Expediente-Warren-The-Conjuring.jpg</thumbnail>
+<fanart></fanart>
+<link>http://streamcloud.eu/vzm1tz1rsopl</link>
+<externallink></externallink>
+</item>
+
+<item>
+<title>EXPEDIENTE WARREN: EL CASO ENFIELD</title>
+<thumbnail>https://pics.filmaffinity.com/the_conjuring_2_the_enfield_poltergeist-489921396-large.jpg</thumbnail>
+<fanart></fanart>
+<link>http://streamcloud.eu/q8wg4i9d0vxv</link>
+<externallink></externallink>
+</item>
+
+<item>
+<title>ANNABELLE</title>
+<thumbnail>https://i.ytimg.com/vi/P01csUDMup4/movieposter.jpg</thumbnail>
+<fanart></fanart>
+<link>https://openload.co/f/ibavFP6dBHY/3xp3d13nt3_W4rr3n_3l_c4s0_3nf13ld_m1080p.mp4</link>
+<externallink></externallink>
+</item>
+
+
+<item>
+<title>ANNABELLE 2: CREATION</title>
+<thumbnail>http://tbsila.cdn.turner.com/tbsila/tvela/images/10650/880971/g/annabelle-2-facebook-warnerbrospictureslatinoamerica-2-.jpg</thumbnail>
+<fanart></fanart>
+<link>https://openload.co/f/vfEXIT1exUA/AnnabelleCreation_%5BBluRayRIP%5D%5Bwww.newpct1.com%5D.avi</link>
+<externallink></externallink>
+</item>
+
+
+<item>
+<title>INSIDIOUS</title>
+<thumbnail>https://pics.filmaffinity.com/insidious-733811348-large.jpg</thumbnail>
+<fanart></fanart>
+<link>http://streamcloud.eu/295zocvo2jnj</link>
+<externallink></externallink>
+</item>
+
+<item>
+<title>INSIDIOUS: CAPITULO 2</title>
+<thumbnail>http://es.web.img3.acsta.net/c_215_290/pictures/210/381/21038147_20130909131948722.jpg</thumbnail>
+<fanart></fanart>
+<link>http://streamcloud.eu/h4tlx0z98k2p</link>
+<externallink></externallink>
+</item>
+
+<item>
+<title>INSIDIOUS: CAPITULO 3</title>
+<thumbnail>http://es.web.img3.acsta.net/c_215_290/pictures/15/05/21/12/54/319461.jpg</thumbnail>
+<fanart></fanart>
+<link>http://streamcloud.eu/ikqcgxsuusm2</link>
+<externallink></externallink>
+</item>
+
+
+<item>
+<title>VERONICA</title>
+<thumbnail>https://www.ecartelera.com/carteles/12600/12651/002_p.jpg</thumbnail>
+<fanart></fanart>
+<link>http://streamcloud.eu/j8k9qpw7bqiu</link>
+<externallink></externallink>
+</item>
+
+
+<item>
+<title>ANT-MAN</title>
+<thumbnail>https://pics.filmaffinity.com/ant_man-627211491-large.jpg</thumbnail>
+<fanart></fanart>
+<link>http://streamcloud.eu/ygwftu7vggyl</link>
+<externallink></externallink>
+</item>
+
+<item>
+<title>DAREDEVIL</title>
+<thumbnail>http://www.formulatv.com/images/series/posters/1000/1006/2_m3.jpg</thumbnail>
+<fanart></fanart>
+<link>http://streamcloud.eu/1rul98cvyomn</link>
+<externallink></externallink>
+</item>
+
+<item>
+<title>Deadpool</title>
+<thumbnail>http://www.fotogramas.es/var/ezflow_site/storage/images/peliculas/deadpool/46079926-3-esl-ES/Deadpool.jpg</thumbnail>
+<fanart></fanart>
+<link>https://openload.co/f/SRGqqkiYHkA/DE4dpolHDR.Catsellano.avi.mp4</link>
+<externallink></externallink>
+</item>
+
+
+<item>
+<title>DOCTOR STRANGE</title>
+<thumbnail>https://openload.co/f/c3JyXhb9xlU/Doctor.Strange.%5BDoctor.Extranyo%5D_%5Bwww.DNPelis.Com%5D.avi.mp4</thumbnail>
+<fanart></fanart>
+<link>https://openload.co/f/c3JyXhb9xlU/Doctor.Strange.%5BDoctor.Extranyo%5D_%5Bwww.DNPelis.Com%5D.avi.mp4</link>
+<externallink></externallink>
+</item>
+
+
+<item>
+<title>HULK</title>
+<thumbnail>http://www.zonanegativa.com/2008/3238.jpg</thumbnail>
+<fanart></fanart>
+<link>http://streamcloud.eu/4tn7ik6o29zb</link>
+<externallink></externallink>
+</item>
+
+<item>
+<title>EL INCREIBLE HULK</title>
+<thumbnail>http://www.c1n3.org/l/lee01a/Images/2003%20Hulk%20(ale).jpg</thumbnail>
+<fanart></fanart>
+<link>http://streamcloud.eu/2xyzbfzvh49a</link>
+<externallink></externallink>
+</item>
+
+<item>
+<title>GHOST RIDER: EL MOTORISTA FANTASMA</title>
+<thumbnail>http://es.web.img2.acsta.net/c_215_290/pictures/16/02/11/13/42/293691.jpg</thumbnail>
+<fanart></fanart>
+<link>https://openload.co/f/lnoBzWaPRUs/El_Motorista_Fantasma_%5BVersion_Extendida%5D_%5Bwww.CineFLV.me%5D.avi.mp4</link>
+<externallink></externallink>
+</item>
+
+
+<item>
+<title>GHOST RIDER 2: ESPIRITU DE VENGANZA</title>
+<thumbnail>http://www.mubis.es/media/covers/3083/19364/ghost-rider-espiritu-de-venganza-original.jpg</thumbnail>
+<fanart></fanart>
+<link>http://streamcloud.eu/uv334xtfcxlp</link>
+<externallink></externallink>
+</item>
+
+
+<item>
+<title>GUARDIANES DE LA GALAXIA</title>
+<thumbnail>https://pics.filmaffinity.com/guardians_of_the_galaxy-595487268-large.jpg</thumbnail>
+<fanart></fanart>
+<link>https://openload.co/f/swbma0MFoYQ/GuardianesdelaGalaxia%23Unknown_Code.mkv.mp4</link>
+<externallink></externallink>
+</item>
+
+<item>
+<title>GUARDIANES DE LA GALAXIA VOL. 2</title>
+<thumbnail>https://2.bp.blogspot.com/-AUpp_XDoC1s/WQlCmHUf9oI/AAAAAAAACHU/y7YA2OZAArQFeuZ0aAxXrxA6zhCquAnmwCLcB/s1600/7X32%2BGUARDIANES%2BDE%2BLA%2BGALAXIA%2BVOL%2B2.jpg</thumbnail>
+<fanart></fanart>
+<link>http://streamcloud.eu/5k0wemb8pkpd</link>
+<externallink></externallink>
+</item>
+
+<item>
+<title>LOS VENGADORES</title>
+<thumbnail>http://www.fotogramas.es/var/ezflow_site/storage/images/peliculas/los-vengadores2/4636128-5-esl-ES/Los-Vengadores.jpg</thumbnail>
+<fanart></fanart>
+<link>https://openload.co/f/XjCOLvwaBKM/Los_vengadores%23Unknown_Code.avi.mp4</link>
+<externallink></externallink>
+</item>
+
+
+<item>
+<title>LOS VENGADORES: LA ERA DE ULTRON</title>
+<thumbnail>https://pics.filmaffinity.com/avengers_age_of_ultron_the_avengers_2-182285335-large.jpg</thumbnail>
+<fanart></fanart>
+<link>http://streamcloud.eu/36cqqn8lh6pb</link>
+<externallink></externallink>
+</item>
+
+
+<item>
+<title>SPIDER-MAN</title>
+<thumbnail>https://pics.filmaffinity.com/spider_man_spiderman-945131720-large.jpg</thumbnail>
+<fanart></fanart>
+<link>http://streamcloud.eu/5kjm18f6z4w5</link>
+<externallink></externallink>
+</item>
+
+<item>
+<title>SPIDER-MAN 2</title>
+<thumbnail>https://i.ytimg.com/vi/lCdxHLJgpwQ/maxresdefault.jpg</thumbnail>
+<fanart></fanart>
+<link>http://streamcloud.eu/izftf9e8rc4w</link>
+<externallink></externallink>
+</item>
+
+<item>
+<title>SPIDER-MAN 3</title>
+<thumbnail>https://i.ytimg.com/vi/e4yv58wJBOI/movieposter.jpg</thumbnail>
+<fanart></fanart>
+<link>http://streamcloud.eu/p1g6wrzewn2w</link>
+<externallink></externallink>
+</item>
+
+
+<item>
+<title>THE AMAZING SPIDERMAN</title>
+<thumbnail>https://ia.media-imdb.com/images/M/MV5BMjMyOTM4MDMxNV5BMl5BanBnXkFtZTcwNjIyNzExOA@@._V1_UY1200_CR89,0,630,1200_AL_.jpg</thumbnail>
+<fanart></fanart>
+<link>https://openload.co/f/PftCSca6s68/The_Amazing_Spider-Man_%282012%29%5BMicroHD-1080p-5.1%5D.mkv.mp4</link>
+<externallink></externallink>
+</item>

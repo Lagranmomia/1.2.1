@@ -1,0 +1,3786 @@
+<SetViewMode>55</SetViewMode>
+
+
+
+<item>
+<title>[COLOR white][B]+[/B][/COLOR][COLOR lime][B] BUSCAR SERIE[/B] [/COLOR][COLOR white]seriespapaya[/COLOR]</title>
+<link>$doregex[makelist1]</link>
+
+
+
+
+
+
+<regex>
+<name>makelist1</name>
+<listrepeat><![CDATA[
+<SetViewMode>55</SetViewMode>
+<title>[COLOR lightblue][makelist1.param1]   [/COLOR]</title>
+<link>$doregex[makelist2]</link>
+<thumbnail>http://www.seriespapaya.com/uploads/[makelist1.param2]</thumbnail>
+<fanart>[makelist1.param2]</fanart>
+]]></listrepeat>
+<expres><![CDATA[titulo\":\"(.*?)\".*?uploads\\/(.*?)\".*?serie\\\/(.*?)\"]]></expres>
+<page>http://www.seriespapaya.com/buscar.php?term=$doregex[search]</page>
+</regex>
+
+<regex>
+<name>search</name>
+<expres><![CDATA[#$pyFunction
+import xbmc
+import xbmcaddon
+import xbmcgui
+def GetLSProData(page_data,Cookie_Jar,m):
+    dialog = xbmcgui.Dialog()
+    d = dialog.input('Buscar Serie: ejemplo: flash o the walking dead', type=xbmcgui.INPUT_ALPHANUM).replace(" ", "+")
+    return d
+]]></expres>
+<page></page>
+<cookieJar></cookieJar>
+</regex>
+
+
+
+<regex>
+<name>makelist2</name>
+<listrepeat><![CDATA[
+<SetViewMode>55</SetViewMode>
+<title>[COLOR lightblue][makelist1.param1] [makelist2.param2]     [/COLOR]</title>
+<link>$doregex[makelist3]</link>
+<thumbnail>http://www.seriespapaya.com/[makelist1.param1]</thumbnail>
+<fanart>http://www.seriespapaya.com/[makelist1.param1]</fanart>
+]]></listrepeat>
+<expres><![CDATA[href="(.*?)".*?nbsp\;(.*?)<]]></expres>
+<page>http://www.seriespapaya.com/serie/[makelist1.param3]</page>
+</regex>
+
+
+
+<regex>
+<name>makelist3</name>
+<listrepeat><![CDATA[
+<SetViewMode>55</SetViewMode>
+<title>[COLOR lightblue][makelist1.param1] [makelist2.param2] | [COLOR red]Idioma:[B][makelist3.param1][/B][/COLOR]  [COLOR lightblue]Calidad:[B][makelist3.param5][/B][/COLOR]  [COLOR red]Server:[B][makelist3.param3][/B][/COLOR]        [/COLOR]</title>
+<link>$doregex[id3]</link>
+<thumbnail>http://www.seriespapaya.com/[makelist1.param1]</thumbnail>
+<fanart>http://www.seriespapaya.com/[makelist1.param1]</fanart>
+]]></listrepeat>
+<expres><![CDATA[idioma[\w\W\s]{0,17}images\/(.*?)\.p[\w\W\s]{0,30}fecha\"\>\n(.*?)<[\w\W\s]{0,117}(Streama.*?|Gamo.*?|Vidoz.*?|Openlo.*?|Kingv.*?)<[\w\W\s]{0,37}href="(.*?)"[\w\W\s]{0,87}calidad">\n(.*?)<]]></expres>
+<page>http://www.seriespapaya.com/[makelist2.param1]</page>
+</regex>
+
+
+
+
+<regex>
+<name>id3</name>
+<expres><![CDATA[#$pyFunction
+def GetLSProData(page_data,Cookie_Jar,m):
+    import urlresolver
+    url = '$doregex[link]'
+    try:
+        u = urlresolver.resolve(url)
+    except:
+        u = 'http://adryanlist.org/error.mp4'
+    return u
+]]></expres>
+<page></page>
+</regex>
+
+<regex>
+<name>link</name>
+<expres>location\.href=\'(.*?)\'</expres>
+<page>[makelist3.param4]</page>[makelist3.param2]
+</regex>
+
+
+<thumbnail>http://i.imgur.com/P1D92cf.png</thumbnail>http://i.imgur.com/P1D92cf.png<fanart></fanart>
+</item>
+
+
+
+
+
+
+
+
+
+<item>
+<title>[COLOR white][B]+ [/B][/COLOR][COLOR lime][B]BUSCAR SERIE[/B] [/COLOR][COLOR white]metaseries[/COLOR]</title>
+<link>$doregex[makelist4]</link>
+
+
+<regex>
+<name>makelist4</name>
+<listrepeat><![CDATA[
+<SetViewMode>55</SetViewMode>
+<title>[makelist4.param2]</title>
+<link>$doregex[makelist3]</link>
+<thumbnail>https://droidzon.com/wp-content/uploads/2018/04/Ver-Series-Online-Gratis-Inka-Series.jpg</thumbnail>
+]]></listrepeat>
+<expres>entry-title.*?href="(.*?)".*?bookmark">(.*?)en\ses</expres>
+<page>http://metaserie.com/?s=$doregex[search]</page>
+</regex>
+
+
+
+<regex>
+<name>search</name>
+<expres><![CDATA[#$pyFunction
+import xbmc
+import xbmcaddon
+import xbmcgui
+def GetLSProData(page_data,Cookie_Jar,m):
+    dialog = xbmcgui.Dialog()
+    d = dialog.input('Buscar Serie: ejemplo: Futurama', type=xbmcgui.INPUT_ALPHANUM).replace(" ", "+")
+    return d
+]]></expres>
+<page></page>
+<cookieJar></cookieJar>
+</regex>
+
+
+
+
+
+<regex>
+<name>makelist3</name>
+<listrepeat><![CDATA[
+<SetViewMode>55</SetViewMode>
+<title>[makelist3.param2]</title>
+<link>$doregex[makelist2]</link>
+<thumbnail>https://droidzon.com/wp-content/uploads/2018/04/Ver-Series-Online-Gratis-Inka-Series.jpg</thumbnail>
+]]></listrepeat>
+<expres>href="(.*?)">(Tempo.*?)<</expres>
+<page>[makelist4.param1]</page>
+</regex>
+
+
+
+
+<regex>
+<name>makelist2</name>
+<listrepeat><![CDATA[
+<SetViewMode>55</SetViewMode>
+<title>[makelist2.param2]</title>
+<link>$doregex[makelist]</link>
+<thumbnail>https://droidzon.com/wp-content/uploads/2018/04/Ver-Series-Online-Gratis-Inka-Series.jpg</thumbnail>
+]]></listrepeat>
+<expres>entry-title.*?href="(.*?)".*?bookmark">(.*?)<</expres>
+<page>[makelist3.param1]</page>
+</regex>
+
+
+<regex>
+<name>makelist</name>
+<listrepeat><![CDATA[
+<SetViewMode>55</SetViewMode>
+<title>server:[makelist.param3] - idioma:[makelist.param1]</title>
+<link>$doregex[id3]</link>
+<thumbnail></thumbnail>
+]]></listrepeat>
+<expres>img\/(.*?)\.png[\w\W\s]{0,80}domain=(.*?)\"[\w\W\s]{0,5}nbsp\;(.*?)<</expres>
+<page>[makelist2.param1]</page>
+</regex>
+<thumbnail>https://droidzon.com/wp-content/uploads/2018/04/Ver-Series-Online-Gratis-Inka-Series.jpg</thumbnail><fanart>https://droidzon.com/wp-content/uploads/2018/04/Ver-Series-Online-Gratis-Inka-Series.jpg</fanart>
+</item>
+
+<regex>
+<name>id3</name>
+<expres><![CDATA[#$pyFunction
+def GetLSProData(page_data,Cookie_Jar,m):
+    import urlresolver
+    url = '[makelist.param2]'
+    try:
+        u = urlresolver.resolve(url)
+    except:
+        u = 'http://adryanlist.org/error.mp4'
+    return u
+]]></expres>
+<page></page>
+</regex>
+
+<thumbnail></thumbnail><fanart></fanart>
+</item>
+
+
+<item>
+<title>[COLOR white][B]+ [/B][/COLOR][COLOR white][B]SERIES PAPAYA[/B][/COLOR]</title>
+<link>$doregex[makelist1]</link>
+
+
+
+
+
+
+<regex>
+<name>makelist1</name>
+<listrepeat><![CDATA[
+<SetViewMode>55</SetViewMode>
+<title>[COLOR lightblue][makelist1.param3]   [/COLOR]</title>
+<link>$doregex[makelist2]</link>
+<thumbnail>http://www.seriespapaya.com/[makelist1.param1]</thumbnail>
+<fanart>http://www.seriespapaya.com/[makelist1.param1]</fanart>
+]]></listrepeat>
+<expres><![CDATA[src="(.*?)"[\w\W\s]{0,60}href="(.*?)".*?\">(.*?)<]]></expres>
+<page>$doregex[select]</page>
+</regex>
+<regex>
+<name>select</name>
+<expres><![CDATA[#$pyFunction
+def GetLSProData(page_data,Cookie_Jar,m):
+   import xbmcgui
+   dialog = xbmcgui.Dialog()
+   ret = dialog.select('Elige tu Audio preferido ', ['Series Populares', 'Series Recomendadas', 'Series de Estreno'])
+   lists = ['http://www.seriespapaya.com/lista-series-populares/', 'http://www.seriespapaya.com/lista-series-recomendadas/','http://www.seriespapaya.com/lista-series-estrenos/']
+   return lists[ret]
+]]></expres>
+<page></page>
+</regex>
+
+
+
+
+<regex>
+<name>makelist2</name>
+<listrepeat><![CDATA[
+<SetViewMode>55</SetViewMode>
+<title>[COLOR lightblue][makelist1.param3] [makelist2.param2]     [/COLOR]</title>
+<link>$doregex[makelist3]</link>
+<thumbnail>http://www.seriespapaya.com/[makelist1.param1]</thumbnail>
+<fanart>http://www.seriespapaya.com/[makelist1.param1]</fanart>
+]]></listrepeat>
+<expres><![CDATA[href="(.*?)".*?nbsp\;(.*?)<]]></expres>
+<page>http://www.seriespapaya.com/[makelist1.param2]</page>
+</regex>
+
+
+
+<regex>
+<name>makelist3</name>
+<listrepeat><![CDATA[
+<SetViewMode>55</SetViewMode>
+<title>[COLOR lightblue][makelist1.param3] [makelist2.param2] | [COLOR red]Idioma:[B][makelist3.param1][/B][/COLOR]  [COLOR lightblue]Calidad:[B][makelist3.param5][/B][/COLOR]  [COLOR red]Server:[B][makelist3.param3][/B][/COLOR]        [/COLOR]</title>
+<link>$doregex[id3]</link>
+<thumbnail>http://www.seriespapaya.com/[makelist1.param1]</thumbnail>
+<fanart>http://www.seriespapaya.com/[makelist1.param1]</fanart>
+]]></listrepeat>
+<expres><![CDATA[idioma[\w\W\s]{0,17}images\/(.*?)\.p[\w\W\s]{0,30}fecha\"\>\n(.*?)<[\w\W\s]{0,117}(Streama.*?|Gamo.*?|Vidoz.*?|Openlo.*?|Kingv.*?)<[\w\W\s]{0,37}href="(.*?)"[\w\W\s]{0,87}calidad">\n(.*?)<]]></expres>
+<page>http://www.seriespapaya.com/[makelist2.param1]</page>
+</regex>
+
+
+
+
+<regex>
+<name>id3</name>
+<expres><![CDATA[#$pyFunction
+def GetLSProData(page_data,Cookie_Jar,m):
+    import urlresolver
+    url = '$doregex[link]'
+    try:
+        u = urlresolver.resolve(url)
+    except:
+        u = 'http://adryanlist.org/error.mp4'
+    return u
+]]></expres>
+<page></page>
+</regex>
+
+<regex>
+<name>link</name>
+<expres>location\.href=\'(.*?)\'</expres>
+<page>[makelist3.param4]</page>[makelist3.param2]
+</regex>
+
+
+<thumbnail>http://i.imgur.com/P1D92cf.png</thumbnail>http://i.imgur.com/P1D92cf.png<fanart></fanart>
+</item>
+
+
+
+
+
+
+
+<item>
+<title>[COLOR white][B]+ [/B][/COLOR][COLOR white][B]INKA SERIES [/B] [/COLOR]</title>
+
+<link>$doregex[makelist0]</link>
+
+<regex>
+<name>makelist0</name>
+<listrepeat><![CDATA[
+<title>Pagina [makelist0.param1]</title>
+<link>$doregex[makelist1]</link>
+]]></listrepeat>
+<expres>'(.*?)'</expres>
+<page>'1''2''3''4''5''6''7''8''9''10''11''12''13''14''15''16''17''18''19''20''21''22''23''24''25'</page>
+</regex>
+
+
+<regex>
+<name>makelist1</name>
+<listrepeat><![CDATA[
+<SetViewMode>55</SetViewMode>
+<title>[COLOR lightblue][makelist1.param2]   [/COLOR]</title>
+<link>$doregex[makelist2]</link>
+<fanart>[makelist1.param3]</fanart>
+<thumbnail>[makelist1.param3]</thumbnail>
+]]></listrepeat>
+<expres><![CDATA[poster\"\shref="(.*?)"\stitle="(.*?)".*?src="(.*?)"]]></expres>
+<page>http://www.inkaseries.com/ultimas-series-agregadas/page/[makelist0.param1]/</page>
+</regex>
+
+
+
+
+<regex>
+<name>makelist2</name>
+<listrepeat><![CDATA[
+<SetViewMode>55</SetViewMode>
+<title>[COLOR lightblue][makelist1.param2] - [makelist2.param3]    [/COLOR]</title>
+<link>$doregex[makelist3]</link>
+<fanart>[makelist1.param3]</fanart>
+<thumbnail>[makelist1.param3]</thumbnail>
+]]></listrepeat>
+<expres><![CDATA[a\shref="(.*?)"\stitle="(T.*?)">(.*?)-]]></expres>
+<page>[makelist1.param1]</page>
+</regex>
+
+
+
+<regex>
+<name>makelist3</name>
+<listrepeat><![CDATA[
+<SetViewMode>55</SetViewMode>
+<title>[COLOR lightblue][makelist1.param2] - [makelist2.param3]  | [COLOR red][B][makelist3.param4][/B][/COLOR]  [COLOR lightblue][B][makelist3.param5][/B][/COLOR]  [COLOR  red]Server:[B][makelist3.param3][/B][/COLOR]        [/COLOR]</title>
+<urlsolve>[makelist3.param1]</urlsolve>
+<fanart>[makelist1.param3]</fanart>
+<thumbnail>[makelist1.param3]</thumbnail>
+]]></listrepeat>
+<expres><![CDATA[domain=(http://gamovideo.*?|https://vidoza.*?|https://kingvid.*?|https://openload.*?|https://streamango.*?)"\s.*?title="(.*?)".*?span>(.*?)<.*?<td>(.*?)<.*?<td>(.*?)<]]></expres>
+<page>[makelist2.param1]</page>
+</regex>
+<thumbnail>https://droidzon.com/wp-content/uploads/2018/04/Ver-Series-Online-Gratis-Inka-Series.jpg</thumbnail><fanart>https://droidzon.com/wp-content/uploads/2018/04/Ver-Series-Online-Gratis-Inka-Series.jpg</fanart></item>
+
+<item>
+<title>[COLOR aquamarine]A dos metros bajo tierra (Six Feet Under)[/COLOR]</title>
+  <link>$doregex[makelist3]</link>
+  <thumbnail>http://www.seriespapaya.com/uploads/A-dos-metros-bajo-tierra-(Six-Feet-Under)19.jpg</thumbnail>
+<fanart>http://www.seriespapaya.com/uploads/A-dos-metros-bajo-tierra-(Six-Feet-Under)19.jpg</fanart>
+ 
+  <regex>
+<name>makelist3</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist3.param3][/COLOR]</title>
+<link>$doregex[makelist5]</link>
+<thumbnail>[makelist3.param2]</thumbnail>
+<fanart>[makelist3.param2]</fanart>
+]]></listrepeat>
+<expres>a class="visco".*?href="([^"]+).*?img src="([^"]+).*?>&nbsp;([^"<]+).*?</expres>
+<page>http://www.seriespapaya.com/serie/a-dos-metros-bajo-tierra.html</page>
+</regex>
+ 
+ 
+  <regex>
+<name>makelist5</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist5.param2][/COLOR]</title>
+<link>$doregex[makelist4]</link>
+<thumbnail>[makelist5.param4]</thumbnail>
+<fanart>[makelist5.param4]</fanart>
+]]></listrepeat>
+<expres>class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?</expres>
+<page>http://www.seriespapaya.com/[makelist3.param1]</page>
+</regex>
+class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?
+class="denlace"([^"<]+).*?href="([^"]+).*?
+ <regex>
+<name>makelist4</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist4.param1][/COLOR]</title>
+<urlsolve>[makelist4.param1]</urlsolve>
+<thumbnail></thumbnail>
+<fanart></fanart>
+]]></listrepeat>
+<expres>href='([^"]+).*?</expres>
+<page>[makelist5.param2]</page>
+</regex>
+  </item>
+-----------------------------------------------------------------------------------------------------
+
+<item>
+<title>[COLOR aquamarine]Arrow[/COLOR]</title>
+  <link>$doregex[makelist3]</link>
+  <thumbnail>http://www.seriespapaya.com/uploads/Arrow63.jpg</thumbnail>
+<fanart>http://www.seriespapaya.com/uploads/Arrow63.jpg</fanart>
+ 
+  <regex>
+<name>makelist3</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist3.param3][/COLOR]</title>
+<link>$doregex[makelist5]</link>
+<thumbnail>[makelist3.param2]</thumbnail>
+<fanart>[makelist3.param2]</fanart>
+]]></listrepeat>
+<expres>a class="visco".*?href="([^"]+).*?img src="([^"]+).*?>&nbsp;([^"<]+).*?</expres>
+<page>http://www.seriespapaya.com/serie/arrow.html</page>
+</regex>
+ 
+ 
+  <regex>
+<name>makelist5</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist5.param2][/COLOR]</title>
+<link>$doregex[makelist4]</link>
+<thumbnail>[makelist5.param4]</thumbnail>
+<fanart>[makelist5.param4]</fanart>
+]]></listrepeat>
+<expres>class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?</expres>
+<page>http://www.seriespapaya.com/[makelist3.param1]</page>
+</regex>
+class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?
+class="denlace"([^"<]+).*?href="([^"]+).*?
+ <regex>
+<name>makelist4</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist4.param1][/COLOR]</title>
+<urlsolve>[makelist4.param1]</urlsolve>
+<thumbnail></thumbnail>
+<fanart></fanart>
+]]></listrepeat>
+<expres>href='([^"]+).*?</expres>
+<page>[makelist5.param2]</page>
+</regex>
+  </item>
+-----------------------------------------------------------------------------------------------------
+
+<item>
+<title>[COLOR aquamarine]American Horror Story[/COLOR]</title>
+  <link>$doregex[makelist3]</link>
+  <thumbnail>http://www.seriespapaya.com/uploads/American-Horror-Story46.jpg</thumbnail>
+<fanart>http://www.seriespapaya.com/uploads/American-Horror-Story46.jpg</fanart>
+ 
+  <regex>
+<name>makelist3</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist3.param3][/COLOR]</title>
+<link>$doregex[makelist5]</link>
+<thumbnail>[makelist3.param2]</thumbnail>
+<fanart>[makelist3.param2]</fanart>
+]]></listrepeat>
+<expres>a class="visco".*?href="([^"]+).*?img src="([^"]+).*?>&nbsp;([^"<]+).*?</expres>
+<page>http://www.seriespapaya.com/serie/american-horror-story.html</page>
+</regex>
+ 
+ 
+  <regex>
+<name>makelist5</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist5.param2][/COLOR]</title>
+<link>$doregex[makelist4]</link>
+<thumbnail>[makelist5.param4]</thumbnail>
+<fanart>[makelist5.param4]</fanart>
+]]></listrepeat>
+<expres>class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?</expres>
+<page>http://www.seriespapaya.com/[makelist3.param1]</page>
+</regex>
+class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?
+class="denlace"([^"<]+).*?href="([^"]+).*?
+ <regex>
+<name>makelist4</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist4.param1][/COLOR]</title>
+<urlsolve>[makelist4.param1]</urlsolve>
+<thumbnail></thumbnail>
+<fanart></fanart>
+]]></listrepeat>
+<expres>href='([^"]+).*?</expres>
+<page>[makelist5.param2]</page>
+</regex>
+  </item>
+-----------------------------------------------------------------------------------------------------
+
+<item>
+<title>[COLOR aquamarine]Ash vs Evil Dead[/COLOR]</title>
+  <link>$doregex[makelist3]</link>
+  <thumbnail>http://www.seriespapaya.com/uploads/Ash-vs-Evil-Dead97.jpg</thumbnail>
+<fanart>http://www.seriespapaya.com/uploads/Ash-vs-Evil-Dead97.jpg</fanart>
+ 
+  <regex>
+<name>makelist3</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist3.param3][/COLOR]</title>
+<link>$doregex[makelist5]</link>
+<thumbnail>[makelist3.param2]</thumbnail>
+<fanart>[makelist3.param2]</fanart>
+]]></listrepeat>
+<expres>a class="visco".*?href="([^"]+).*?img src="([^"]+).*?>&nbsp;([^"<]+).*?</expres>
+<page>http://www.seriespapaya.com/serie/ash-vs-evil-dead.html</page>
+</regex>
+ 
+ 
+  <regex>
+<name>makelist5</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist5.param2][/COLOR]</title>
+<link>$doregex[makelist4]</link>
+<thumbnail>[makelist5.param4]</thumbnail>
+<fanart>[makelist5.param4]</fanart>
+]]></listrepeat>
+<expres>class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?</expres>
+<page>http://www.seriespapaya.com/[makelist3.param1]</page>
+</regex>
+class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?
+class="denlace"([^"<]+).*?href="([^"]+).*?
+ <regex>
+<name>makelist4</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist4.param1][/COLOR]</title>
+<urlsolve>[makelist4.param1]</urlsolve>
+<thumbnail></thumbnail>
+<fanart></fanart>
+]]></listrepeat>
+<expres>href='([^"]+).*?</expres>
+<page>[makelist5.param2]</page>
+</regex>
+  </item>
+-----------------------------------------------------------------------------------------------------
+
+<item>
+<title>[COLOR aquamarine]Agent X[/COLOR]</title>
+  <link>$doregex[makelist3]</link>
+  <thumbnail>http://www.seriespapaya.com/uploads/Agent-X69.jpg</thumbnail>
+<fanart>http://www.seriespapaya.com/uploads/Agent-X69.jpg</fanart>
+ 
+  <regex>
+<name>makelist3</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist3.param3][/COLOR]</title>
+<link>$doregex[makelist5]</link>
+<thumbnail>[makelist3.param2]</thumbnail>
+<fanart>[makelist3.param2]</fanart>
+]]></listrepeat>
+<expres>a class="visco".*?href="([^"]+).*?img src="([^"]+).*?>&nbsp;([^"<]+).*?</expres>
+<page>http://www.seriespapaya.com/serie/Agent-x.html</page>
+</regex>
+ 
+ 
+  <regex>
+<name>makelist5</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist5.param2][/COLOR]</title>
+<link>$doregex[makelist4]</link>
+<thumbnail>[makelist5.param4]</thumbnail>
+<fanart>[makelist5.param4]</fanart>
+]]></listrepeat>
+<expres>class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?</expres>
+<page>http://www.seriespapaya.com/[makelist3.param1]</page>
+</regex>
+class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?
+class="denlace"([^"<]+).*?href="([^"]+).*?
+ <regex>
+<name>makelist4</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist4.param1][/COLOR]</title>
+<urlsolve>[makelist4.param1]</urlsolve>
+<thumbnail></thumbnail>
+<fanart></fanart>
+]]></listrepeat>
+<expres>href='([^"]+).*?</expres>
+<page>[makelist5.param2]</page>
+</regex>
+  </item>
+-----------------------------------------------------------------------------------------------------
+
+<item>
+<title>[COLOR aquamarine]Anger Management[/COLOR]</title>
+  <link>$doregex[makelist3]</link>
+  <thumbnail>http://www.seriespapaya.com/uploads/Anger-Management57.jpg</thumbnail>
+<fanart>http://www.seriespapaya.com/uploads/Anger-Management57.jpg</fanart>
+ 
+  <regex>
+<name>makelist3</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist3.param3][/COLOR]</title>
+<link>$doregex[makelist5]</link>
+<thumbnail>[makelist3.param2]</thumbnail>
+<fanart>[makelist3.param2]</fanart>
+]]></listrepeat>
+<expres>a class="visco".*?href="([^"]+).*?img src="([^"]+).*?>&nbsp;([^"<]+).*?</expres>
+<page>http://www.seriespapaya.com/serie/anger-management.html</page>
+</regex>
+ 
+ 
+  <regex>
+<name>makelist5</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist5.param2][/COLOR]</title>
+<link>$doregex[makelist4]</link>
+<thumbnail>[makelist5.param4]</thumbnail>
+<fanart>[makelist5.param4]</fanart>
+]]></listrepeat>
+<expres>class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?</expres>
+<page>http://www.seriespapaya.com/[makelist3.param1]</page>
+</regex>
+class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?
+class="denlace"([^"<]+).*?href="([^"]+).*?
+ <regex>
+<name>makelist4</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist4.param1][/COLOR]</title>
+<urlsolve>[makelist4.param1]</urlsolve>
+<thumbnail></thumbnail>
+<fanart></fanart>
+]]></listrepeat>
+<expres>href='([^"]+).*?</expres>
+<page>[makelist5.param2]</page>
+</regex>
+  </item>
+-----------------------------------------------------------------------------------------------------
+
+<item>
+<title>[COLOR aquamarine]American Crime[/COLOR]</title>
+  <link>$doregex[makelist3]</link>
+  <thumbnail>http://www.seriespapaya.com/uploads/American-Crime68.jpg</thumbnail>
+<fanart>http://www.seriespapaya.com/uploads/American-Crime68.jpg</fanart>
+ 
+  <regex>
+<name>makelist3</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist3.param3][/COLOR]</title>
+<link>$doregex[makelist5]</link>
+<thumbnail>[makelist3.param2]</thumbnail>
+<fanart>[makelist3.param2]</fanart>
+]]></listrepeat>
+<expres>a class="visco".*?href="([^"]+).*?img src="([^"]+).*?>&nbsp;([^"<]+).*?</expres>
+<page>http://www.seriespapaya.com/serie/american-crime.html</page>
+</regex>
+ 
+ 
+  <regex>
+<name>makelist5</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist5.param2][/COLOR]</title>
+<link>$doregex[makelist4]</link>
+<thumbnail>[makelist5.param4]</thumbnail>
+<fanart>[makelist5.param4]</fanart>
+]]></listrepeat>
+<expres>class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?</expres>
+<page>http://www.seriespapaya.com/[makelist3.param1]</page>
+</regex>
+class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?
+class="denlace"([^"<]+).*?href="([^"]+).*?
+ <regex>
+<name>makelist4</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist4.param1][/COLOR]</title>
+<urlsolve>[makelist4.param1]</urlsolve>
+<thumbnail></thumbnail>
+<fanart></fanart>
+]]></listrepeat>
+<expres>href='([^"]+).*?</expres>
+<page>[makelist5.param2]</page>
+</regex>
+  </item>
+-----------------------------------------------------------------------------------------------------
+
+<item>
+<title>[COLOR aquamarine]And Then There Were[/COLOR]</title>
+  <link>$doregex[makelist3]</link>
+  <thumbnail>http://www.seriespapaya.com/uploads/And-Then-There-Were84.jpg</thumbnail>
+<fanart>http://www.seriespapaya.com/uploads/And-Then-There-Were84.jpg</fanart>
+ 
+  <regex>
+<name>makelist3</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist3.param3][/COLOR]</title>
+<link>$doregex[makelist5]</link>
+<thumbnail>[makelist3.param2]</thumbnail>
+<fanart>[makelist3.param2]</fanart>
+]]></listrepeat>
+<expres>a class="visco".*?href="([^"]+).*?img src="([^"]+).*?>&nbsp;([^"<]+).*?</expres>
+<page>http://www.seriespapaya.com/serie/and-then-there-were.html</page>
+</regex>
+ 
+ 
+  <regex>
+<name>makelist5</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist5.param2][/COLOR]</title>
+<link>$doregex[makelist4]</link>
+<thumbnail>[makelist5.param4]</thumbnail>
+<fanart>[makelist5.param4]</fanart>
+]]></listrepeat>
+<expres>class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?</expres>
+<page>http://www.seriespapaya.com/[makelist3.param1]</page>
+</regex>
+class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?
+class="denlace"([^"<]+).*?href="([^"]+).*?
+ <regex>
+<name>makelist4</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist4.param1][/COLOR]</title>
+<urlsolve>[makelist4.param1]</urlsolve>
+<thumbnail></thumbnail>
+<fanart></fanart>
+]]></listrepeat>
+<expres>href='([^"]+).*?</expres>
+<page>[makelist5.param2]</page>
+</regex>
+  </item>
+-----------------------------------------------------------------------------------------------------
+
+<item>
+<title>[COLOR aquamarine]Angel from Hell[/COLOR]</title>
+  <link>$doregex[makelist3]</link>
+  <thumbnail>http://www.seriespapaya.com/uploads/Angel-from-Hell19.jpg</thumbnail>
+<fanart>http://www.seriespapaya.com/uploads/Angel-from-Hell19.jpg</fanart>
+ 
+  <regex>
+<name>makelist3</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist3.param3][/COLOR]</title>
+<link>$doregex[makelist5]</link>
+<thumbnail>[makelist3.param2]</thumbnail>
+<fanart>[makelist3.param2]</fanart>
+]]></listrepeat>
+<expres>a class="visco".*?href="([^"]+).*?img src="([^"]+).*?>&nbsp;([^"<]+).*?</expres>
+<page>http://www.seriespapaya.com/serie/angel-from-hell.html</page>
+</regex>
+ 
+ 
+  <regex>
+<name>makelist5</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist5.param2][/COLOR]</title>
+<link>$doregex[makelist4]</link>
+<thumbnail>[makelist5.param4]</thumbnail>
+<fanart>[makelist5.param4]</fanart>
+]]></listrepeat>
+<expres>class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?</expres>
+<page>http://www.seriespapaya.com/[makelist3.param1]</page>
+</regex>
+class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?
+class="denlace"([^"<]+).*?href="([^"]+).*?
+ <regex>
+<name>makelist4</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist4.param1][/COLOR]</title>
+<urlsolve>[makelist4.param1]</urlsolve>
+<thumbnail></thumbnail>
+<fanart></fanart>
+]]></listrepeat>
+<expres>href='([^"]+).*?</expres>
+<page>[makelist5.param2]</page>
+</regex>
+  </item>
+-----------------------------------------------------------------------------------------------------
+
+<item>
+<title>[COLOR aquamarine]Angie Tribeca[/COLOR]</title>
+  <link>$doregex[makelist3]</link>
+  <thumbnail>http://www.seriespapaya.com/uploads/Angie-Tribeca93.jpg</thumbnail>
+<fanart>http://www.seriespapaya.com/uploads/Angie-Tribeca93.jpg</fanart>
+ 
+  <regex>
+<name>makelist3</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist3.param3][/COLOR]</title>
+<link>$doregex[makelist5]</link>
+<thumbnail>[makelist3.param2]</thumbnail>
+<fanart>[makelist3.param2]</fanart>
+]]></listrepeat>
+<expres>a class="visco".*?href="([^"]+).*?img src="([^"]+).*?>&nbsp;([^"<]+).*?</expres>
+<page>http://www.seriespapaya.com/serie/angie-tribeca.html</page>
+</regex>
+ 
+ 
+  <regex>
+<name>makelist5</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist5.param2][/COLOR]</title>
+<link>$doregex[makelist4]</link>
+<thumbnail>[makelist5.param4]</thumbnail>
+<fanart>[makelist5.param4]</fanart>
+]]></listrepeat>
+<expres>class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?</expres>
+<page>http://www.seriespapaya.com/[makelist3.param1]</page>
+</regex>
+class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?
+class="denlace"([^"<]+).*?href="([^"]+).*?
+ <regex>
+<name>makelist4</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist4.param1][/COLOR]</title>
+<urlsolve>[makelist4.param1]</urlsolve>
+<thumbnail></thumbnail>
+<fanart></fanart>
+]]></listrepeat>
+<expres>href='([^"]+).*?</expres>
+<page>[makelist5.param2]</page>
+</regex>
+  </item>
+-----------------------------------------------------------------------------------------------------
+
+<item>
+<title>[COLOR aquamarine]Aventura en pareja[/COLOR]</title>
+  <link>$doregex[makelist3]</link>
+  <thumbnail>http://www.seriespapaya.com/uploads/Aventura-en-pareja63.jpg</thumbnail>
+<fanart>http://www.seriespapaya.com/uploads/Aventura-en-pareja63.jpg</fanart>
+ 
+  <regex>
+<name>makelist3</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist3.param3][/COLOR]</title>
+<link>$doregex[makelist5]</link>
+<thumbnail>[makelist3.param2]</thumbnail>
+<fanart>[makelist3.param2]</fanart>
+]]></listrepeat>
+<expres>a class="visco".*?href="([^"]+).*?img src="([^"]+).*?>&nbsp;([^"<]+).*?</expres>
+<page>http://www.seriespapaya.com/serie/aventura-en-pareja.html</page>
+</regex>
+ 
+ 
+  <regex>
+<name>makelist5</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist5.param2][/COLOR]</title>
+<link>$doregex[makelist4]</link>
+<thumbnail>[makelist5.param4]</thumbnail>
+<fanart>[makelist5.param4]</fanart>
+]]></listrepeat>
+<expres>class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?</expres>
+<page>http://www.seriespapaya.com/[makelist3.param1]</page>
+</regex>
+class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?
+class="denlace"([^"<]+).*?href="([^"]+).*?
+ <regex>
+<name>makelist4</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist4.param1][/COLOR]</title>
+<urlsolve>[makelist4.param1]</urlsolve>
+<thumbnail></thumbnail>
+<fanart></fanart>
+]]></listrepeat>
+<expres>href='([^"]+).*?</expres>
+<page>[makelist5.param2]</page>
+</regex>
+  </item>
+-----------------------------------------------------------------------------------------------------
+
+<item>
+<title>[COLOR aquamarine]Agent Carter[/COLOR]</title>
+  <link>$doregex[makelist3]</link>
+  <thumbnail>http://www.seriespapaya.com/uploads/Agent-Carter59.jpg</thumbnail>
+<fanart>http://www.seriespapaya.com/uploads/Agent-Carter59.jpg</fanart>
+ 
+  <regex>
+<name>makelist3</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist3.param3][/COLOR]</title>
+<link>$doregex[makelist5]</link>
+<thumbnail>[makelist3.param2]</thumbnail>
+<fanart>[makelist3.param2]</fanart>
+]]></listrepeat>
+<expres>a class="visco".*?href="([^"]+).*?img src="([^"]+).*?>&nbsp;([^"<]+).*?</expres>
+<page>http://www.seriespapaya.com/serie/agent-carter.html</page>
+</regex>
+ 
+ 
+  <regex>
+<name>makelist5</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist5.param2][/COLOR]</title>
+<link>$doregex[makelist4]</link>
+<thumbnail>[makelist5.param4]</thumbnail>
+<fanart>[makelist5.param4]</fanart>
+]]></listrepeat>
+<expres>class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?</expres>
+<page>http://www.seriespapaya.com/[makelist3.param1]</page>
+</regex>
+class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?
+class="denlace"([^"<]+).*?href="([^"]+).*?
+ <regex>
+<name>makelist4</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist4.param1][/COLOR]</title>
+<urlsolve>[makelist4.param1]</urlsolve>
+<thumbnail></thumbnail>
+<fanart></fanart>
+]]></listrepeat>
+<expres>href='([^"]+).*?</expres>
+<page>[makelist5.param2]</page>
+</regex>
+  </item>
+-----------------------------------------------------------------------------------------------------
+
+<item>
+<title>[COLOR aquamarine]American Crime Story[/COLOR]</title>
+  <link>$doregex[makelist3]</link>
+  <thumbnail>http://www.seriespapaya.com/uploads/American-Crime-Story58.jpg</thumbnail>
+<fanart>http://www.seriespapaya.com/uploads/American-Crime-Story58.jpg</fanart>
+ 
+  <regex>
+<name>makelist3</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist3.param3][/COLOR]</title>
+<link>$doregex[makelist5]</link>
+<thumbnail>[makelist3.param2]</thumbnail>
+<fanart>[makelist3.param2]</fanart>
+]]></listrepeat>
+<expres>a class="visco".*?href="([^"]+).*?img src="([^"]+).*?>&nbsp;([^"<]+).*?</expres>
+<page>http://www.seriespapaya.com/serie/american-crime-story.html</page>
+</regex>
+ 
+ 
+  <regex>
+<name>makelist5</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist5.param2][/COLOR]</title>
+<link>$doregex[makelist4]</link>
+<thumbnail>[makelist5.param4]</thumbnail>
+<fanart>[makelist5.param4]</fanart>
+]]></listrepeat>
+<expres>class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?</expres>
+<page>http://www.seriespapaya.com/[makelist3.param1]</page>
+</regex>
+class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?
+class="denlace"([^"<]+).*?href="([^"]+).*?
+ <regex>
+<name>makelist4</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist4.param1][/COLOR]</title>
+<urlsolve>[makelist4.param1]</urlsolve>
+<thumbnail></thumbnail>
+<fanart></fanart>
+]]></listrepeat>
+<expres>href='([^"]+).*?</expres>
+<page>[makelist5.param2]</page>
+</regex>
+  </item>
+-----------------------------------------------------------------------------------------------------
+
+<item>
+<title>[COLOR aquamarine]Animalshttp://www.seriespapaya.com/serie/animals.html[/COLOR]</title>
+  <link>$doregex[makelist3]</link>
+  <thumbnail>http://www.seriespapaya.com/uploads/Animals38.jpg</thumbnail>
+<fanart>http://www.seriespapaya.com/uploads/Animals38.jpg</fanart>
+ 
+  <regex>
+<name>makelist3</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist3.param3][/COLOR]</title>
+<link>$doregex[makelist5]</link>
+<thumbnail>[makelist3.param2]</thumbnail>
+<fanart>[makelist3.param2]</fanart>
+]]></listrepeat>
+<expres>a class="visco".*?href="([^"]+).*?img src="([^"]+).*?>&nbsp;([^"<]+).*?</expres>
+<page>http://www.seriespapaya.com/serie/animals.html</page>
+</regex>
+ 
+ 
+  <regex>
+<name>makelist5</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist5.param2][/COLOR]</title>
+<link>$doregex[makelist4]</link>
+<thumbnail>[makelist5.param4]</thumbnail>
+<fanart>[makelist5.param4]</fanart>
+]]></listrepeat>
+<expres>class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?</expres>
+<page>http://www.seriespapaya.com/[makelist3.param1]</page>
+</regex>
+class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?
+class="denlace"([^"<]+).*?href="([^"]+).*?
+ <regex>
+<name>makelist4</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist4.param1][/COLOR]</title>
+<urlsolve>[makelist4.param1]</urlsolve>
+<thumbnail></thumbnail>
+<fanart></fanart>
+]]></listrepeat>
+<expres>href='([^"]+).*?</expres>
+<page>[makelist5.param2]</page>
+</regex>
+  </item>
+-----------------------------------------------------------------------------------------------------
+
+<item>
+<title>[COLOR aquamarine]Atrapada en el medio (Stuck in the Middle)[/COLOR]</title>
+  <link>$doregex[makelist3]</link>
+  <thumbnail>http://www.seriespapaya.com/uploads/Atrapada-en-el-medio-(Stuck-in-the-Middle)61.jpg</thumbnail>
+<fanart>http://www.seriespapaya.com/uploads/Atrapada-en-el-medio-(Stuck-in-the-Middle)61.jpg</fanart>
+ 
+  <regex>
+<name>makelist3</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist3.param3][/COLOR]</title>
+<link>$doregex[makelist5]</link>
+<thumbnail>[makelist3.param2]</thumbnail>
+<fanart>[makelist3.param2]</fanart>
+]]></listrepeat>
+<expres>a class="visco".*?href="([^"]+).*?img src="([^"]+).*?>&nbsp;([^"<]+).*?</expres>
+<page>http://www.seriespapaya.com/serie/stuck-in-the-middle.html</page>
+</regex>
+ 
+ 
+  <regex>
+<name>makelist5</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist5.param2][/COLOR]</title>
+<link>$doregex[makelist4]</link>
+<thumbnail>[makelist5.param4]</thumbnail>
+<fanart>[makelist5.param4]</fanart>
+]]></listrepeat>
+<expres>class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?</expres>
+<page>http://www.seriespapaya.com/[makelist3.param1]</page>
+</regex>
+class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?
+class="denlace"([^"<]+).*?href="([^"]+).*?
+ <regex>
+<name>makelist4</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist4.param1][/COLOR]</title>
+<urlsolve>[makelist4.param1]</urlsolve>
+<thumbnail></thumbnail>
+<fanart></fanart>
+]]></listrepeat>
+<expres>href='([^"]+).*?</expres>
+<page>[makelist5.param2]</page>
+</regex>
+  </item>
+-----------------------------------------------------------------------------------------------------
+
+<item>
+<title>[COLOR aquamarine]Ascension[/COLOR]</title>
+  <link>$doregex[makelist3]</link>
+  <thumbnail>http://www.seriespapaya.com/uploads/Ascension69.jpg</thumbnail>
+<fanart>http://www.seriespapaya.com/uploads/Ascension69.jpg</fanart>
+ 
+  <regex>
+<name>makelist3</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist3.param3][/COLOR]</title>
+<link>$doregex[makelist5]</link>
+<thumbnail>[makelist3.param2]</thumbnail>
+<fanart>[makelist3.param2]</fanart>
+]]></listrepeat>
+<expres>a class="visco".*?href="([^"]+).*?img src="([^"]+).*?>&nbsp;([^"<]+).*?</expres>
+<page>http://www.seriespapaya.com/serie/ascension.html</page>
+</regex>
+ 
+ 
+  <regex>
+<name>makelist5</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist5.param2][/COLOR]</title>
+<link>$doregex[makelist4]</link>
+<thumbnail>[makelist5.param4]</thumbnail>
+<fanart>[makelist5.param4]</fanart>
+]]></listrepeat>
+<expres>class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?</expres>
+<page>http://www.seriespapaya.com/[makelist3.param1]</page>
+</regex>
+class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?
+class="denlace"([^"<]+).*?href="([^"]+).*?
+ <regex>
+<name>makelist4</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist4.param1][/COLOR]</title>
+<urlsolve>[makelist4.param1]</urlsolve>
+<thumbnail></thumbnail>
+<fanart></fanart>
+]]></listrepeat>
+<expres>href='([^"]+).*?</expres>
+<page>[makelist5.param2]</page>
+</regex>
+  </item>
+-----------------------------------------------------------------------------------------------------
+<item>
+<title>[COLOR aquamarine]Antigone 34[/COLOR]</title>
+  <link>$doregex[makelist3]</link>
+  <thumbnail>http://www.seriespapaya.com/uploads/Antigone-346.jpg</thumbnail>
+<fanart>http://www.seriespapaya.com/uploads/Antigone-346.jpg</fanart>
+ 
+  <regex>
+<name>makelist3</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist3.param3][/COLOR]</title>
+<link>$doregex[makelist5]</link>
+<thumbnail>[makelist3.param2]</thumbnail>
+<fanart>[makelist3.param2]</fanart>
+]]></listrepeat>
+<expres>a class="visco".*?href="([^"]+).*?img src="([^"]+).*?>&nbsp;([^"<]+).*?</expres>
+<page>http://www.seriespapaya.com/serie/antigone-34.html</page>
+</regex>
+ 
+ 
+  <regex>
+<name>makelist5</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist5.param2][/COLOR]</title>
+<link>$doregex[makelist4]</link>
+<thumbnail>[makelist5.param4]</thumbnail>
+<fanart>[makelist5.param4]</fanart>
+]]></listrepeat>
+<expres>class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?</expres>
+<page>http://www.seriespapaya.com/[makelist3.param1]</page>
+</regex>
+class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?
+class="denlace"([^"<]+).*?href="([^"]+).*?
+ <regex>
+<name>makelist4</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist4.param1][/COLOR]</title>
+<urlsolve>[makelist4.param1]</urlsolve>
+<thumbnail></thumbnail>
+<fanart></fanart>
+]]></listrepeat>
+<expres>href='([^"]+).*?</expres>
+<page>[makelist5.param2]</page>
+</regex>
+  </item>
+-----------------------------------------------------------------------------------------------------
+<item>
+<title>[COLOR aquamarine]Avengers Assemble (Los Vengadores Unidos)[/COLOR]</title>
+  <link>$doregex[makelist3]</link>
+  <thumbnail>http://www.seriespapaya.com/uploads/Avengers-Assemble-(Los-Vengadores-Unidos)40.jpg</thumbnail>
+<fanart>http://www.seriespapaya.com/uploads/Avengers-Assemble-(Los-Vengadores-Unidos)40.jpg</fanart>
+ 
+  <regex>
+<name>makelist3</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist3.param3][/COLOR]</title>
+<link>$doregex[makelist5]</link>
+<thumbnail>[makelist3.param2]</thumbnail>
+<fanart>[makelist3.param2]</fanart>
+]]></listrepeat>
+<expres>a class="visco".*?href="([^"]+).*?img src="([^"]+).*?>&nbsp;([^"<]+).*?</expres>
+<page>http://www.seriespapaya.com/serie/avengers-assemble.html</page>
+</regex>
+ 
+ 
+  <regex>
+<name>makelist5</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist5.param2][/COLOR]</title>
+<link>$doregex[makelist4]</link>
+<thumbnail>[makelist5.param4]</thumbnail>
+<fanart>[makelist5.param4]</fanart>
+]]></listrepeat>
+<expres>class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?</expres>
+<page>http://www.seriespapaya.com/[makelist3.param1]</page>
+</regex>
+class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?
+class="denlace"([^"<]+).*?href="([^"]+).*?
+ <regex>
+<name>makelist4</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist4.param1][/COLOR]</title>
+<urlsolve>[makelist4.param1]</urlsolve>
+<thumbnail></thumbnail>
+<fanart></fanart>
+]]></listrepeat>
+<expres>href='([^"]+).*?</expres>
+<page>[makelist5.param2]</page>
+</regex>
+  </item>
+-----------------------------------------------------------------------------------------------------
+
+<item>
+<title>[COLOR aquamarine]Ajin[/COLOR]</title>
+  <link>$doregex[makelist3]</link>
+  <thumbnail>http://www.seriespapaya.com/uploads/Ajin20.jpg</thumbnail>
+<fanart>http://www.seriespapaya.com/uploads/Ajin20.jpg</fanart>
+ 
+  <regex>
+<name>makelist3</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist3.param3][/COLOR]</title>
+<link>$doregex[makelist5]</link>
+<thumbnail>[makelist3.param2]</thumbnail>
+<fanart>[makelist3.param2]</fanart>
+]]></listrepeat>
+<expres>a class="visco".*?href="([^"]+).*?img src="([^"]+).*?>&nbsp;([^"<]+).*?</expres>
+<page>http://www.seriespapaya.com/serie/ajin.html</page>
+</regex>
+ 
+ 
+  <regex>
+<name>makelist5</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist5.param2][/COLOR]</title>
+<link>$doregex[makelist4]</link>
+<thumbnail>[makelist5.param4]</thumbnail>
+<fanart>[makelist5.param4]</fanart>
+]]></listrepeat>
+<expres>class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?</expres>
+<page>http://www.seriespapaya.com/[makelist3.param1]</page>
+</regex>
+class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?
+class="denlace"([^"<]+).*?href="([^"]+).*?
+ <regex>
+<name>makelist4</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist4.param1][/COLOR]</title>
+<urlsolve>[makelist4.param1]</urlsolve>
+<thumbnail></thumbnail>
+<fanart></fanart>
+]]></listrepeat>
+<expres>href='([^"]+).*?</expres>
+<page>[makelist5.param2]</page>
+</regex>
+  </item>
+-----------------------------------------------------------------------------------------------------
+
+<item>
+<title>[COLOR aquamarine]American Grit[/COLOR]</title>
+  <link>$doregex[makelist3]</link>
+  <thumbnail>http://www.seriespapaya.com/uploads/American-Grit27.jpg</thumbnail>
+<fanart>http://www.seriespapaya.com/uploads/American-Grit27.jpg</fanart>
+ 
+  <regex>
+<name>makelist3</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist3.param3][/COLOR]</title>
+<link>$doregex[makelist5]</link>
+<thumbnail>[makelist3.param2]</thumbnail>
+<fanart>[makelist3.param2]</fanart>
+]]></listrepeat>
+<expres>a class="visco".*?href="([^"]+).*?img src="([^"]+).*?>&nbsp;([^"<]+).*?</expres>
+<page>http://www.seriespapaya.com/serie/american-grit.html</page>
+</regex>
+ 
+ 
+  <regex>
+<name>makelist5</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist5.param2][/COLOR]</title>
+<link>$doregex[makelist4]</link>
+<thumbnail>[makelist5.param4]</thumbnail>
+<fanart>[makelist5.param4]</fanart>
+]]></listrepeat>
+<expres>class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?</expres>
+<page>http://www.seriespapaya.com/[makelist3.param1]</page>
+</regex>
+class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?
+class="denlace"([^"<]+).*?href="([^"]+).*?
+ <regex>
+<name>makelist4</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist4.param1][/COLOR]</title>
+<urlsolve>[makelist4.param1]</urlsolve>
+<thumbnail></thumbnail>
+<fanart></fanart>
+]]></listrepeat>
+<expres>href='([^"]+).*?</expres>
+<page>[makelist5.param2]</page>
+</regex>
+  </item>
+-----------------------------------------------------------------------------------------------------
+
+<item>
+<title>[COLOR aquamarine]Anatomia de Grey[/COLOR]</title>
+  <link>$doregex[makelist3]</link>
+  <thumbnail>http://www.seriespapaya.com/uploads/Anatomia-de-Grey83.jpg</thumbnail>
+<fanart>http://www.seriespapaya.com/uploads/Anatomia-de-Grey83.jpg</fanart>
+ 
+  <regex>
+<name>makelist3</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist3.param3][/COLOR]</title>
+<link>$doregex[makelist5]</link>
+<thumbnail>[makelist3.param2]</thumbnail>
+<fanart>[makelist3.param2]</fanart>
+]]></listrepeat>
+<expres>a class="visco".*?href="([^"]+).*?img src="([^"]+).*?>&nbsp;([^"<]+).*?</expres>
+<page>http://www.seriespapaya.com/serie/anatomia-de-grey.html</page>
+</regex>
+ 
+ 
+  <regex>
+<name>makelist5</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist5.param2][/COLOR]</title>
+<link>$doregex[makelist4]</link>
+<thumbnail>[makelist5.param4]</thumbnail>
+<fanart>[makelist5.param4]</fanart>
+]]></listrepeat>
+<expres>class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?</expres>
+<page>http://www.seriespapaya.com/[makelist3.param1]</page>
+</regex>
+class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?
+class="denlace"([^"<]+).*?href="([^"]+).*?
+ <regex>
+<name>makelist4</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist4.param1][/COLOR]</title>
+<urlsolve>[makelist4.param1]</urlsolve>
+<thumbnail></thumbnail>
+<fanart></fanart>
+]]></listrepeat>
+<expres>href='([^"]+).*?</expres>
+<page>[makelist5.param2]</page>
+</regex>
+  </item>
+-----------------------------------------------------------------------------------------------------
+
+<item>
+<title>[COLOR aquamarine]Angel o demonio[/COLOR]</title>
+  <link>$doregex[makelist3]</link>
+  <thumbnail>http://www.seriespapaya.com/uploads/Angel-o-demonio2.jpg</thumbnail>
+<fanart>http://www.seriespapaya.com/uploads/Angel-o-demonio2.jpg</fanart>
+ 
+  <regex>
+<name>makelist3</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist3.param3][/COLOR]</title>
+<link>$doregex[makelist5]</link>
+<thumbnail>[makelist3.param2]</thumbnail>
+<fanart>[makelist3.param2]</fanart>
+]]></listrepeat>
+<expres>a class="visco".*?href="([^"]+).*?img src="([^"]+).*?>&nbsp;([^"<]+).*?</expres>
+<page>http://www.seriespapaya.com/serie/angel-o-demonio.html</page>
+</regex>
+ 
+ 
+  <regex>
+<name>makelist5</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist5.param2][/COLOR]</title>
+<link>$doregex[makelist4]</link>
+<thumbnail>[makelist5.param4]</thumbnail>
+<fanart>[makelist5.param4]</fanart>
+]]></listrepeat>
+<expres>class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?</expres>
+<page>http://www.seriespapaya.com/[makelist3.param1]</page>
+</regex>
+class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?
+class="denlace"([^"<]+).*?href="([^"]+).*?
+ <regex>
+<name>makelist4</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist4.param1][/COLOR]</title>
+<urlsolve>[makelist4.param1]</urlsolve>
+<thumbnail></thumbnail>
+<fanart></fanart>
+]]></listrepeat>
+<expres>href='([^"]+).*?</expres>
+<page>[makelist5.param2]</page>
+</regex>
+  </item>
+-----------------------------------------------------------------------------------------------------
+
+<item>
+<title>[COLOR aquamarine]Aquarius[/COLOR]</title>
+  <link>$doregex[makelist3]</link>
+  <thumbnail>http://www.seriespapaya.com/uploads/Aquarius71.jpg</thumbnail>
+<fanart>http://www.seriespapaya.com/uploads/Aquarius71.jpg</fanart>
+ 
+  <regex>
+<name>makelist3</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist3.param3][/COLOR]</title>
+<link>$doregex[makelist5]</link>
+<thumbnail>[makelist3.param2]</thumbnail>
+<fanart>[makelist3.param2]</fanart>
+]]></listrepeat>
+<expres>a class="visco".*?href="([^"]+).*?img src="([^"]+).*?>&nbsp;([^"<]+).*?</expres>
+<page>http://www.seriespapaya.com/serie/aquarius.html</page>
+</regex>
+ 
+ 
+  <regex>
+<name>makelist5</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist5.param2][/COLOR]</title>
+<link>$doregex[makelist4]</link>
+<thumbnail>[makelist5.param4]</thumbnail>
+<fanart>[makelist5.param4]</fanart>
+]]></listrepeat>
+<expres>class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?</expres>
+<page>http://www.seriespapaya.com/[makelist3.param1]</page>
+</regex>
+class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?
+class="denlace"([^"<]+).*?href="([^"]+).*?
+ <regex>
+<name>makelist4</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist4.param1][/COLOR]</title>
+<urlsolve>[makelist4.param1]</urlsolve>
+<thumbnail></thumbnail>
+<fanart></fanart>
+]]></listrepeat>
+<expres>href='([^"]+).*?</expres>
+<page>[makelist5.param2]</page>
+</regex>
+  </item>
+-----------------------------------------------------------------------------------------------------
+
+<item>
+<title>[COLOR aquamarine]Atrapado en el tiempo (Day Break)[/COLOR]</title>
+  <link>$doregex[makelist3]</link>
+  <thumbnail>http://www.seriespapaya.com/uploads/Atrapado-en-el-tiempo-(Day-Break)51.jpg</thumbnail>
+<fanart>http://www.seriespapaya.com/uploads/Atrapado-en-el-tiempo-(Day-Break)51.jpg</fanart>
+ 
+  <regex>
+<name>makelist3</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist3.param3][/COLOR]</title>
+<link>$doregex[makelist5]</link>
+<thumbnail>[makelist3.param2]</thumbnail>
+<fanart>[makelist3.param2]</fanart>
+]]></listrepeat>
+<expres>a class="visco".*?href="([^"]+).*?img src="([^"]+).*?>&nbsp;([^"<]+).*?</expres>
+<page>http://www.seriespapaya.com/serie/day-break.html</page>
+</regex>
+ 
+ 
+  <regex>
+<name>makelist5</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist5.param2][/COLOR]</title>
+<link>$doregex[makelist4]</link>
+<thumbnail>[makelist5.param4]</thumbnail>
+<fanart>[makelist5.param4]</fanart>
+]]></listrepeat>
+<expres>class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?</expres>
+<page>http://www.seriespapaya.com/[makelist3.param1]</page>
+</regex>
+class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?
+class="denlace"([^"<]+).*?href="([^"]+).*?
+ <regex>
+<name>makelist4</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist4.param1][/COLOR]</title>
+<urlsolve>[makelist4.param1]</urlsolve>
+<thumbnail></thumbnail>
+<fanart></fanart>
+]]></listrepeat>
+<expres>href='([^"]+).*?</expres>
+<page>[makelist5.param2]</page>
+</regex>
+  </item>
+-----------------------------------------------------------------------------------------------------
+
+<item>
+<title>[COLOR aquamarine]Alli abajo[/COLOR]</title>
+  <link>$doregex[makelist3]</link>
+  <thumbnail>http://www.seriespapaya.com/uploads/Alli-abajo19.jpg</thumbnail>
+<fanart>http://www.seriespapaya.com/uploads/Alli-abajo19.jpg</fanart>
+ 
+  <regex>
+<name>makelist3</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist3.param3][/COLOR]</title>
+<link>$doregex[makelist5]</link>
+<thumbnail>[makelist3.param2]</thumbnail>
+<fanart>[makelist3.param2]</fanart>
+]]></listrepeat>
+<expres>a class="visco".*?href="([^"]+).*?img src="([^"]+).*?>&nbsp;([^"<]+).*?</expres>
+<page>http://www.seriespapaya.com/serie/alli-abajo.html</page>
+</regex>
+ 
+ 
+  <regex>
+<name>makelist5</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist5.param2][/COLOR]</title>
+<link>$doregex[makelist4]</link>
+<thumbnail>[makelist5.param4]</thumbnail>
+<fanart>[makelist5.param4]</fanart>
+]]></listrepeat>
+<expres>class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?</expres>
+<page>http://www.seriespapaya.com/[makelist3.param1]</page>
+</regex>
+class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?
+class="denlace"([^"<]+).*?href="([^"]+).*?
+ <regex>
+<name>makelist4</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist4.param1][/COLOR]</title>
+<urlsolve>[makelist4.param1]</urlsolve>
+<thumbnail></thumbnail>
+<fanart></fanart>
+]]></listrepeat>
+<expres>href='([^"]+).*?</expres>
+<page>[makelist5.param2]</page>
+</regex>
+  </item>
+-----------------------------------------------------------------------------------------------------
+
+<item>
+<title>[COLOR aquamarine]Acapulco Shore[/COLOR]</title>
+  <link>$doregex[makelist3]</link>
+  <thumbnail>http://www.seriespapaya.com/uploads/Acapulco-Shore36.jpg</thumbnail>
+<fanart>http://www.seriespapaya.com/uploads/Acapulco-Shore36.jpg</fanart>
+ 
+  <regex>
+<name>makelist3</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist3.param3][/COLOR]</title>
+<link>$doregex[makelist5]</link>
+<thumbnail>[makelist3.param2]</thumbnail>
+<fanart>[makelist3.param2]</fanart>
+]]></listrepeat>
+<expres>a class="visco".*?href="([^"]+).*?img src="([^"]+).*?>&nbsp;([^"<]+).*?</expres>
+<page>http://www.seriespapaya.com/serie/acapulco-shore.html</page>
+</regex>
+ 
+ 
+  <regex>
+<name>makelist5</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist5.param2][/COLOR]</title>
+<link>$doregex[makelist4]</link>
+<thumbnail>[makelist5.param4]</thumbnail>
+<fanart>[makelist5.param4]</fanart>
+]]></listrepeat>
+<expres>class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?</expres>
+<page>http://www.seriespapaya.com/[makelist3.param1]</page>
+</regex>
+class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?
+class="denlace"([^"<]+).*?href="([^"]+).*?
+ <regex>
+<name>makelist4</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist4.param1][/COLOR]</title>
+<urlsolve>[makelist4.param1]</urlsolve>
+<thumbnail></thumbnail>
+<fanart></fanart>
+]]></listrepeat>
+<expres>href='([^"]+).*?</expres>
+<page>[makelist5.param2]</page>
+</regex>
+  </item>
+-----------------------------------------------------------------------------------------------------
+
+<item>
+<title>[COLOR aquamarine]Animal Kingdom[/COLOR]</title>
+  <link>$doregex[makelist3]</link>
+  <thumbnail>http://www.seriespapaya.com/uploads/Animal-Kingdom64.jpg</thumbnail>
+<fanart>http://www.seriespapaya.com/uploads/Animal-Kingdom64.jpg</fanart>
+ 
+  <regex>
+<name>makelist3</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist3.param3][/COLOR]</title>
+<link>$doregex[makelist5]</link>
+<thumbnail>[makelist3.param2]</thumbnail>
+<fanart>[makelist3.param2]</fanart>
+]]></listrepeat>
+<expres>a class="visco".*?href="([^"]+).*?img src="([^"]+).*?>&nbsp;([^"<]+).*?</expres>
+<page>http://www.seriespapaya.com/serie/animal-kingdom.html</page>
+</regex>
+ 
+ 
+  <regex>
+<name>makelist5</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist5.param2][/COLOR]</title>
+<link>$doregex[makelist4]</link>
+<thumbnail>[makelist5.param4]</thumbnail>
+<fanart>[makelist5.param4]</fanart>
+]]></listrepeat>
+<expres>class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?</expres>
+<page>http://www.seriespapaya.com/[makelist3.param1]</page>
+</regex>
+class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?
+class="denlace"([^"<]+).*?href="([^"]+).*?
+ <regex>
+<name>makelist4</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist4.param1][/COLOR]</title>
+<urlsolve>[makelist4.param1]</urlsolve>
+<thumbnail></thumbnail>
+<fanart></fanart>
+]]></listrepeat>
+<expres>href='([^"]+).*?</expres>
+<page>[makelist5.param2]</page>
+</regex>
+  </item>
+-----------------------------------------------------------------------------------------------------
+<item>
+<title>[COLOR aquamarine]Aguila Roja[/COLOR]</title>
+  <link>$doregex[makelist3]</link>
+  <thumbnail>http://www.seriespapaya.com/uploads/Aguila-Roja69.jpg</thumbnail>
+<fanart>http://www.seriespapaya.com/uploads/Aguila-Roja69.jpg</fanart>
+ 
+  <regex>
+<name>makelist3</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist3.param3][/COLOR]</title>
+<link>$doregex[makelist5]</link>
+<thumbnail>[makelist3.param2]</thumbnail>
+<fanart>[makelist3.param2]</fanart>
+]]></listrepeat>
+<expres>a class="visco".*?href="([^"]+).*?img src="([^"]+).*?>&nbsp;([^"<]+).*?</expres>
+<page>http://www.seriespapaya.com/serie/aguila-roja.html</page>
+</regex>
+ 
+ 
+  <regex>
+<name>makelist5</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist5.param2][/COLOR]</title>
+<link>$doregex[makelist4]</link>
+<thumbnail>[makelist5.param4]</thumbnail>
+<fanart>[makelist5.param4]</fanart>
+]]></listrepeat>
+<expres>class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?</expres>
+<page>http://www.seriespapaya.com/[makelist3.param1]</page>
+</regex>
+class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?
+class="denlace"([^"<]+).*?href="([^"]+).*?
+ <regex>
+<name>makelist4</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist4.param1][/COLOR]</title>
+<urlsolve>[makelist4.param1]</urlsolve>
+<thumbnail></thumbnail>
+<fanart></fanart>
+]]></listrepeat>
+<expres>href='([^"]+).*?</expres>
+<page>[makelist5.param2]</page>
+</regex>
+  </item>
+-----------------------------------------------------------------------------------------------------
+<item>
+<title>[COLOR aquamarine]Andromeda[/COLOR]</title>
+  <link>$doregex[makelist3]</link>
+  <thumbnail>http://www.seriespapaya.com/uploads/Andromeda8.jpg</thumbnail>
+<fanart>http://www.seriespapaya.com/uploads/Andromeda8.jpg</fanart>
+ 
+  <regex>
+<name>makelist3</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist3.param3][/COLOR]</title>
+<link>$doregex[makelist5]</link>
+<thumbnail>[makelist3.param2]</thumbnail>
+<fanart>[makelist3.param2]</fanart>
+]]></listrepeat>
+<expres>a class="visco".*?href="([^"]+).*?img src="([^"]+).*?>&nbsp;([^"<]+).*?</expres>
+<page>http://www.seriespapaya.com/serie/andromeda.html</page>
+</regex>
+ 
+ 
+  <regex>
+<name>makelist5</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist5.param2][/COLOR]</title>
+<link>$doregex[makelist4]</link>
+<thumbnail>[makelist5.param4]</thumbnail>
+<fanart>[makelist5.param4]</fanart>
+]]></listrepeat>
+<expres>class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?</expres>
+<page>http://www.seriespapaya.com/[makelist3.param1]</page>
+</regex>
+class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?
+class="denlace"([^"<]+).*?href="([^"]+).*?
+ <regex>
+<name>makelist4</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist4.param1][/COLOR]</title>
+<urlsolve>[makelist4.param1]</urlsolve>
+<thumbnail></thumbnail>
+<fanart></fanart>
+]]></listrepeat>
+<expres>href='([^"]+).*?</expres>
+<page>[makelist5.param2]</page>
+</regex>
+  </item>
+-----------------------------------------------------------------------------------------------------
+<item>
+<title>[COLOR aquamarine]ALF[/COLOR]</title>
+  <link>$doregex[makelist3]</link>
+  <thumbnail>http://www.seriespapaya.com/uploads/ALF87.jpg</thumbnail>
+<fanart>http://www.seriespapaya.com/uploads/ALF87.jpg</fanart>
+ 
+  <regex>
+<name>makelist3</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist3.param3][/COLOR]</title>
+<link>$doregex[makelist5]</link>
+<thumbnail>[makelist3.param2]</thumbnail>
+<fanart>[makelist3.param2]</fanart>
+]]></listrepeat>
+<expres>a class="visco".*?href="([^"]+).*?img src="([^"]+).*?>&nbsp;([^"<]+).*?</expres>
+<page>http://www.seriespapaya.com/serie/alf.html</page>
+</regex>
+ 
+ 
+  <regex>
+<name>makelist5</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist5.param2][/COLOR]</title>
+<link>$doregex[makelist4]</link>
+<thumbnail>[makelist5.param4]</thumbnail>
+<fanart>[makelist5.param4]</fanart>
+]]></listrepeat>
+<expres>class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?</expres>
+<page>http://www.seriespapaya.com/[makelist3.param1]</page>
+</regex>
+class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?
+class="denlace"([^"<]+).*?href="([^"]+).*?
+ <regex>
+<name>makelist4</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist4.param1][/COLOR]</title>
+<urlsolve>[makelist4.param1]</urlsolve>
+<thumbnail></thumbnail>
+<fanart></fanart>
+]]></listrepeat>
+<expres>href='([^"]+).*?</expres>
+<page>[makelist5.param2]</page>
+</regex>
+  </item>
+-----------------------------------------------------------------------------------------------------
+<item>
+<title>[COLOR aquamarine]Another Period[/COLOR]</title>
+  <link>$doregex[makelist3]</link>
+  <thumbnail>http://www.seriespapaya.com/uploads/Another-Period49.jpg</thumbnail>
+<fanart>http://www.seriespapaya.com/uploads/Another-Period49.jpg</fanart>
+ 
+  <regex>
+<name>makelist3</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist3.param3][/COLOR]</title>
+<link>$doregex[makelist5]</link>
+<thumbnail>[makelist3.param2]</thumbnail>
+<fanart>[makelist3.param2]</fanart>
+]]></listrepeat>
+<expres>a class="visco".*?href="([^"]+).*?img src="([^"]+).*?>&nbsp;([^"<]+).*?</expres>
+<page>http://www.seriespapaya.com/serie/another-period.html</page>
+</regex>
+ 
+ 
+  <regex>
+<name>makelist5</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist5.param2][/COLOR]</title>
+<link>$doregex[makelist4]</link>
+<thumbnail>[makelist5.param4]</thumbnail>
+<fanart>[makelist5.param4]</fanart>
+]]></listrepeat>
+<expres>class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?</expres>
+<page>http://www.seriespapaya.com/[makelist3.param1]</page>
+</regex>
+class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?
+class="denlace"([^"<]+).*?href="([^"]+).*?
+ <regex>
+<name>makelist4</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist4.param1][/COLOR]</title>
+<urlsolve>[makelist4.param1]</urlsolve>
+<thumbnail></thumbnail>
+<fanart></fanart>
+]]></listrepeat>
+<expres>href='([^"]+).*?</expres>
+<page>[makelist5.param2]</page>
+</regex>
+  </item>
+-----------------------------------------------------------------------------------------------------
+<item>
+<title>[COLOR aquamarine]American Gothic[/COLOR]</title>
+  <link>$doregex[makelist3]</link>
+  <thumbnail>http://www.seriespapaya.com/uploads/American-Gothic53.jpg</thumbnail>
+<fanart>http://www.seriespapaya.com/uploads/American-Gothic53.jpg</fanart>
+ 
+  <regex>
+<name>makelist3</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist3.param3][/COLOR]</title>
+<link>$doregex[makelist5]</link>
+<thumbnail>[makelist3.param2]</thumbnail>
+<fanart>[makelist3.param2]</fanart>
+]]></listrepeat>
+<expres>a class="visco".*?href="([^"]+).*?img src="([^"]+).*?>&nbsp;([^"<]+).*?</expres>
+<page>http://www.seriespapaya.com/serie/american-gothic.html</page>
+</regex>
+ 
+ 
+  <regex>
+<name>makelist5</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist5.param2][/COLOR]</title>
+<link>$doregex[makelist4]</link>
+<thumbnail>[makelist5.param4]</thumbnail>
+<fanart>[makelist5.param4]</fanart>
+]]></listrepeat>
+<expres>class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?</expres>
+<page>http://www.seriespapaya.com/[makelist3.param1]</page>
+</regex>
+class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?
+class="denlace"([^"<]+).*?href="([^"]+).*?
+ <regex>
+<name>makelist4</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist4.param1][/COLOR]</title>
+<urlsolve>[makelist4.param1]</urlsolve>
+<thumbnail></thumbnail>
+<fanart></fanart>
+]]></listrepeat>
+<expres>href='([^"]+).*?</expres>
+<page>[makelist5.param2]</page>
+</regex>
+  </item>
+-----------------------------------------------------------------------------------------------------
+
+<item>
+<title>[COLOR aquamarine]Asesinato en primer grado (Murder in the First)[/COLOR]</title>
+  <link>$doregex[makelist3]</link>
+  <thumbnail>http://www.seriespapaya.com/uploads/Asesinato-en-primer-grado-(Murder-in-the-First)34.jpg</thumbnail>
+<fanart>http://www.seriespapaya.com/uploads/Asesinato-en-primer-grado-(Murder-in-the-First)34.jpg</fanart>
+ 
+  <regex>
+<name>makelist3</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist3.param3][/COLOR]</title>
+<link>$doregex[makelist5]</link>
+<thumbnail>[makelist3.param2]</thumbnail>
+<fanart>[makelist3.param2]</fanart>
+]]></listrepeat>
+<expres>a class="visco".*?href="([^"]+).*?img src="([^"]+).*?>&nbsp;([^"<]+).*?</expres>
+<page>http://www.seriespapaya.com/serie/murder-in-the-first.html</page>
+</regex>
+ 
+ 
+  <regex>
+<name>makelist5</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist5.param2][/COLOR]</title>
+<link>$doregex[makelist4]</link>
+<thumbnail>[makelist5.param4]</thumbnail>
+<fanart>[makelist5.param4]</fanart>
+]]></listrepeat>
+<expres>class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?</expres>
+<page>http://www.seriespapaya.com/[makelist3.param1]</page>
+</regex>
+class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?
+class="denlace"([^"<]+).*?href="([^"]+).*?
+ <regex>
+<name>makelist4</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist4.param1][/COLOR]</title>
+<urlsolve>[makelist4.param1]</urlsolve>
+<thumbnail></thumbnail>
+<fanart></fanart>
+]]></listrepeat>
+<expres>href='([^"]+).*?</expres>
+<page>[makelist5.param2]</page>
+</regex>
+  </item>
+-----------------------------------------------------------------------------------------------------
+
+<item>
+<title>[COLOR aquamarine]Ataque a los Titanes (Shingeki no Kyojin)[/COLOR]</title>
+  <link>$doregex[makelist3]</link>
+  <thumbnail>http://www.seriespapaya.com/uploads/Ataque-a-los-Titanes-(Shingeki-no-Kyojin)47.jpg</thumbnail>
+<fanart>http://www.seriespapaya.com/uploads/Ataque-a-los-Titanes-(Shingeki-no-Kyojin)47.jpg</fanart>
+ 
+  <regex>
+<name>makelist3</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist3.param3][/COLOR]</title>
+<link>$doregex[makelist5]</link>
+<thumbnail>[makelist3.param2]</thumbnail>
+<fanart>[makelist3.param2]</fanart>
+]]></listrepeat>
+<expres>a class="visco".*?href="([^"]+).*?img src="([^"]+).*?>&nbsp;([^"<]+).*?</expres>
+<page>http://www.seriespapaya.com/serie/shingeki-no-kyojin.html</page>
+</regex>
+ 
+ 
+  <regex>
+<name>makelist5</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist5.param2][/COLOR]</title>
+<link>$doregex[makelist4]</link>
+<thumbnail>[makelist5.param4]</thumbnail>
+<fanart>[makelist5.param4]</fanart>
+]]></listrepeat>
+<expres>class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?</expres>
+<page>http://www.seriespapaya.com/[makelist3.param1]</page>
+</regex>
+class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?
+class="denlace"([^"<]+).*?href="([^"]+).*?
+ <regex>
+<name>makelist4</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist4.param1][/COLOR]</title>
+<urlsolve>[makelist4.param1]</urlsolve>
+<thumbnail></thumbnail>
+<fanart></fanart>
+]]></listrepeat>
+<expres>href='([^"]+).*?</expres>
+<page>[makelist5.param2]</page>
+</regex>
+  </item>
+-----------------------------------------------------------------------------------------------------
+
+<item>
+<title>[COLOR aquamarine]Alienigenas Ancestrales (Generacion alien)[/COLOR]</title>
+  <link>$doregex[makelist3]</link>
+  <thumbnail>http://www.seriespapaya.com/uploads/Alienigenas-ancestrales8.jpg</thumbnail>
+<fanart>http://www.seriespapaya.com/uploads/Alienigenas-ancestrales8.jpg</fanart>
+ 
+  <regex>
+<name>makelist3</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist3.param3][/COLOR]</title>
+<link>$doregex[makelist5]</link>
+<thumbnail>[makelist3.param2]</thumbnail>
+<fanart>[makelist3.param2]</fanart>
+]]></listrepeat>
+<expres>a class="visco".*?href="([^"]+).*?img src="([^"]+).*?>&nbsp;([^"<]+).*?</expres>
+<page>http://www.seriespapaya.com/serie/alienigenas-ancestrales.html</page>
+</regex>
+ 
+ 
+  <regex>
+<name>makelist5</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist5.param2][/COLOR]</title>
+<link>$doregex[makelist4]</link>
+<thumbnail>[makelist5.param4]</thumbnail>
+<fanart>[makelist5.param4]</fanart>
+]]></listrepeat>
+<expres>class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?</expres>
+<page>http://www.seriespapaya.com/[makelist3.param1]</page>
+</regex>
+class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?
+class="denlace"([^"<]+).*?href="([^"]+).*?
+ <regex>
+<name>makelist4</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist4.param1][/COLOR]</title>
+<urlsolve>[makelist4.param1]</urlsolve>
+<thumbnail></thumbnail>
+<fanart></fanart>
+]]></listrepeat>
+<expres>href='([^"]+).*?</expres>
+<page>[makelist5.param2]</page>
+</regex>
+  </item>
+-----------------------------------------------------------------------------------------------------
+
+<item>
+<title>[COLOR aquamarine]Agents of Shield[/COLOR]</title>
+  <link>$doregex[makelist3]</link>
+  <thumbnail>http://www.seriespapaya.com/uploads/Agents-of-Shield93.jpg</thumbnail>
+<fanart>http://www.seriespapaya.com/uploads/Agents-of-Shield93.jpg</fanart>
+ 
+  <regex>
+<name>makelist3</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist3.param3][/COLOR]</title>
+<link>$doregex[makelist5]</link>
+<thumbnail>[makelist3.param2]</thumbnail>
+<fanart>[makelist3.param2]</fanart>
+]]></listrepeat>
+<expres>a class="visco".*?href="([^"]+).*?img src="([^"]+).*?>&nbsp;([^"<]+).*?</expres>
+<page>http://www.seriespapaya.com/serie/agents-of-shield.html</page>
+</regex>
+ 
+ 
+  <regex>
+<name>makelist5</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist5.param2][/COLOR]</title>
+<link>$doregex[makelist4]</link>
+<thumbnail>[makelist5.param4]</thumbnail>
+<fanart>[makelist5.param4]</fanart>
+]]></listrepeat>
+<expres>class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?</expres>
+<page>http://www.seriespapaya.com/[makelist3.param1]</page>
+</regex>
+class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?
+class="denlace"([^"<]+).*?href="([^"]+).*?
+ <regex>
+<name>makelist4</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist4.param1][/COLOR]</title>
+<urlsolve>[makelist4.param1]</urlsolve>
+<thumbnail></thumbnail>
+<fanart></fanart>
+]]></listrepeat>
+<expres>href='([^"]+).*?</expres>
+<page>[makelist5.param2]</page>
+</regex>
+  </item>
+-----------------------------------------------------------------------------------------------------
+
+<item>
+<title>[COLOR aquamarine]Absuelto (Frikjent)[/COLOR]</title>
+  <link>$doregex[makelist3]</link>
+  <thumbnail>http://www.seriespapaya.com/uploads/Absuelto-(Frikjent)75.jpg</thumbnail>
+<fanart>http://www.seriespapaya.com/uploads/Absuelto-(Frikjent)75.jpg</fanart>
+ 
+  <regex>
+<name>makelist3</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist3.param3][/COLOR]</title>
+<link>$doregex[makelist5]</link>
+<thumbnail>[makelist3.param2]</thumbnail>
+<fanart>[makelist3.param2]</fanart>
+]]></listrepeat>
+<expres>a class="visco".*?href="([^"]+).*?img src="([^"]+).*?>&nbsp;([^"<]+).*?</expres>
+<page>http://www.seriespapaya.com/serie/absuelto.html</page>
+</regex>
+ 
+ 
+  <regex>
+<name>makelist5</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist5.param2][/COLOR]</title>
+<link>$doregex[makelist4]</link>
+<thumbnail>[makelist5.param4]</thumbnail>
+<fanart>[makelist5.param4]</fanart>
+]]></listrepeat>
+<expres>class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?</expres>
+<page>http://www.seriespapaya.com/[makelist3.param1]</page>
+</regex>
+class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?
+class="denlace"([^"<]+).*?href="([^"]+).*?
+ <regex>
+<name>makelist4</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist4.param1][/COLOR]</title>
+<urlsolve>[makelist4.param1]</urlsolve>
+<thumbnail></thumbnail>
+<fanart></fanart>
+]]></listrepeat>
+<expres>href='([^"]+).*?</expres>
+<page>[makelist5.param2]</page>
+</regex>
+  </item>
+-----------------------------------------------------------------------------------------------------
+
+<item>
+<title>[COLOR aquamarine]Assassination Classroom[/COLOR]</title>
+  <link>$doregex[makelist3]</link>
+  <thumbnail>http://www.seriespapaya.com/uploads/Assassination-Classroom98.jpg</thumbnail>
+<fanart>http://www.seriespapaya.com/uploads/Assassination-Classroom98.jpg</fanart>
+ 
+  <regex>
+<name>makelist3</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist3.param3][/COLOR]</title>
+<link>$doregex[makelist5]</link>
+<thumbnail>[makelist3.param2]</thumbnail>
+<fanart>[makelist3.param2]</fanart>
+]]></listrepeat>
+<expres>a class="visco".*?href="([^"]+).*?img src="([^"]+).*?>&nbsp;([^"<]+).*?</expres>
+<page>http://www.seriespapaya.com/serie/assassination-slassroom.html</page>
+</regex>
+ 
+ 
+  <regex>
+<name>makelist5</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist5.param2][/COLOR]</title>
+<link>$doregex[makelist4]</link>
+<thumbnail>[makelist5.param4]</thumbnail>
+<fanart>[makelist5.param4]</fanart>
+]]></listrepeat>
+<expres>class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?</expres>
+<page>http://www.seriespapaya.com/[makelist3.param1]</page>
+</regex>
+class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?
+class="denlace"([^"<]+).*?href="([^"]+).*?
+ <regex>
+<name>makelist4</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist4.param1][/COLOR]</title>
+<urlsolve>[makelist4.param1]</urlsolve>
+<thumbnail></thumbnail>
+<fanart></fanart>
+]]></listrepeat>
+<expres>href='([^"]+).*?</expres>
+<page>[makelist5.param2]</page>
+</regex>
+  </item>
+-----------------------------------------------------------------------------------------------------
+
+<item>
+<title>[COLOR aquamarine]Archer[/COLOR]</title>
+  <link>$doregex[makelist3]</link>
+  <thumbnail></thumbnail>
+<fanart></fanart>
+ 
+  <regex>
+<name>makelist3</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist3.param3][/COLOR]</title>
+<link>$doregex[makelist5]</link>
+<thumbnail>[makelist3.param2]</thumbnail>
+<fanart>[makelist3.param2]</fanart>
+]]></listrepeat>
+<expres>a class="visco".*?href="([^"]+).*?img src="([^"]+).*?>&nbsp;([^"<]+).*?</expres>
+<page>http://www.seriespapaya.com/serie/archer.html</page>
+</regex>
+ 
+ 
+  <regex>
+<name>makelist5</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist5.param2][/COLOR]</title>
+<link>$doregex[makelist4]</link>
+<thumbnail>[makelist5.param4]</thumbnail>
+<fanart>[makelist5.param4]</fanart>
+]]></listrepeat>
+<expres>class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?</expres>
+<page>http://www.seriespapaya.com/[makelist3.param1]</page>
+</regex>
+class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?
+class="denlace"([^"<]+).*?href="([^"]+).*?
+ <regex>
+<name>makelist4</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist4.param1][/COLOR]</title>
+<urlsolve>[makelist4.param1]</urlsolve>
+<thumbnail></thumbnail>
+<fanart></fanart>
+]]></listrepeat>
+<expres>href='([^"]+).*?</expres>
+<page>[makelist5.param2]</page>
+</regex>
+  </item>
+-----------------------------------------------------------------------------------------------------
+
+<item>
+<title>[COLOR aquamarine]Agatha Raisin[/COLOR]</title>
+  <link>$doregex[makelist3]</link>
+  <thumbnail></thumbnail>
+<fanart></fanart>
+ 
+  <regex>
+<name>makelist3</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist3.param3][/COLOR]</title>
+<link>$doregex[makelist5]</link>
+<thumbnail>[makelist3.param2]</thumbnail>
+<fanart>[makelist3.param2]</fanart>
+]]></listrepeat>
+<expres>a class="visco".*?href="([^"]+).*?img src="([^"]+).*?>&nbsp;([^"<]+).*?</expres>
+<page>http://www.seriespapaya.com/serie/agatha-raisin.html</page>
+</regex>
+ 
+ 
+  <regex>
+<name>makelist5</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist5.param2][/COLOR]</title>
+<link>$doregex[makelist4]</link>
+<thumbnail>[makelist5.param4]</thumbnail>
+<fanart>[makelist5.param4]</fanart>
+]]></listrepeat>
+<expres>class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?</expres>
+<page>http://www.seriespapaya.com/[makelist3.param1]</page>
+</regex>
+class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?
+class="denlace"([^"<]+).*?href="([^"]+).*?
+ <regex>
+<name>makelist4</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist4.param1][/COLOR]</title>
+<urlsolve>[makelist4.param1]</urlsolve>
+<thumbnail></thumbnail>
+<fanart></fanart>
+]]></listrepeat>
+<expres>href='([^"]+).*?</expres>
+<page>[makelist5.param2]</page>
+</regex>
+  </item>
+-----------------------------------------------------------------------------------------------------
+
+<item>
+<title>[COLOR aquamarine]A Place To Call Home[/COLOR]</title>
+  <link>$doregex[makelist3]</link>
+  <thumbnail></thumbnail>
+<fanart></fanart>
+ 
+  <regex>
+<name>makelist3</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist3.param3][/COLOR]</title>
+<link>$doregex[makelist5]</link>
+<thumbnail>[makelist3.param2]</thumbnail>
+<fanart>[makelist3.param2]</fanart>
+]]></listrepeat>
+<expres>a class="visco".*?href="([^"]+).*?img src="([^"]+).*?>&nbsp;([^"<]+).*?</expres>
+<page>http://www.seriespapaya.com/serie/a-place-to-call-home.html</page>
+</regex>
+ 
+ 
+  <regex>
+<name>makelist5</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist5.param2][/COLOR]</title>
+<link>$doregex[makelist4]</link>
+<thumbnail>[makelist5.param4]</thumbnail>
+<fanart>[makelist5.param4]</fanart>
+]]></listrepeat>
+<expres>class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?</expres>
+<page>http://www.seriespapaya.com/[makelist3.param1]</page>
+</regex>
+class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?
+class="denlace"([^"<]+).*?href="([^"]+).*?
+ <regex>
+<name>makelist4</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist4.param1][/COLOR]</title>
+<urlsolve>[makelist4.param1]</urlsolve>
+<thumbnail></thumbnail>
+<fanart></fanart>
+]]></listrepeat>
+<expres>href='([^"]+).*?</expres>
+<page>[makelist5.param2]</page>
+</regex>
+  </item>
+-----------------------------------------------------------------------------------------------------
+
+<item>
+<title>[COLOR aquamarine]Alcatraz[/COLOR]</title>
+  <link>$doregex[makelist3]</link>
+  <thumbnail></thumbnail>
+<fanart></fanart>
+ 
+  <regex>
+<name>makelist3</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist3.param3][/COLOR]</title>
+<link>$doregex[makelist5]</link>
+<thumbnail>[makelist3.param2]</thumbnail>
+<fanart>[makelist3.param2]</fanart>
+]]></listrepeat>
+<expres>a class="visco".*?href="([^"]+).*?img src="([^"]+).*?>&nbsp;([^"<]+).*?</expres>
+<page>http://www.seriespapaya.com/serie/alcatraz.html</page>
+</regex>
+ 
+ 
+  <regex>
+<name>makelist5</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist5.param2][/COLOR]</title>
+<link>$doregex[makelist4]</link>
+<thumbnail>[makelist5.param4]</thumbnail>
+<fanart>[makelist5.param4]</fanart>
+]]></listrepeat>
+<expres>class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?</expres>
+<page>http://www.seriespapaya.com/[makelist3.param1]</page>
+</regex>
+class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?
+class="denlace"([^"<]+).*?href="([^"]+).*?
+ <regex>
+<name>makelist4</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist4.param1][/COLOR]</title>
+<urlsolve>[makelist4.param1]</urlsolve>
+<thumbnail></thumbnail>
+<fanart></fanart>
+]]></listrepeat>
+<expres>href='([^"]+).*?</expres>
+<page>[makelist5.param2]</page>
+</regex>
+  </item>
+-----------------------------------------------------------------------------------------------------
+
+<item>
+<title>[COLOR aquamarine]Atlanta[/COLOR]</title>
+  <link>$doregex[makelist3]</link>
+  <thumbnail></thumbnail>
+<fanart></fanart>
+ 
+  <regex>
+<name>makelist3</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist3.param3][/COLOR]</title>
+<link>$doregex[makelist5]</link>
+<thumbnail>[makelist3.param2]</thumbnail>
+<fanart>[makelist3.param2]</fanart>
+]]></listrepeat>
+<expres>a class="visco".*?href="([^"]+).*?img src="([^"]+).*?>&nbsp;([^"<]+).*?</expres>
+<page>http://www.seriespapaya.com/serie/atlanta.html</page>
+</regex>
+ 
+ 
+  <regex>
+<name>makelist5</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist5.param2][/COLOR]</title>
+<link>$doregex[makelist4]</link>
+<thumbnail>[makelist5.param4]</thumbnail>
+<fanart>[makelist5.param4]</fanart>
+]]></listrepeat>
+<expres>class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?</expres>
+<page>http://www.seriespapaya.com/[makelist3.param1]</page>
+</regex>
+class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?
+class="denlace"([^"<]+).*?href="([^"]+).*?
+ <regex>
+<name>makelist4</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist4.param1][/COLOR]</title>
+<urlsolve>[makelist4.param1]</urlsolve>
+<thumbnail></thumbnail>
+<fanart></fanart>
+]]></listrepeat>
+<expres>href='([^"]+).*?</expres>
+<page>[makelist5.param2]</page>
+</regex>
+  </item>
+-----------------------------------------------------------------------------------------------------
+
+<item>
+<title>[COLOR aquamarine]Alienigenas la ultima definitiva[/COLOR]</title>
+  <link>$doregex[makelist3]</link>
+  <thumbnail></thumbnail>
+<fanart></fanart>
+ 
+  <regex>
+<name>makelist3</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist3.param3][/COLOR]</title>
+<link>$doregex[makelist5]</link>
+<thumbnail>[makelist3.param2]</thumbnail>
+<fanart>[makelist3.param2]</fanart>
+]]></listrepeat>
+<expres>a class="visco".*?href="([^"]+).*?img src="([^"]+).*?>&nbsp;([^"<]+).*?</expres>
+<page>http://www.seriespapaya.com/serie/alienigenas-la-ultima-definitiva.html</page>
+</regex>
+ 
+ 
+  <regex>
+<name>makelist5</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist5.param2][/COLOR]</title>
+<link>$doregex[makelist4]</link>
+<thumbnail>[makelist5.param4]</thumbnail>
+<fanart>[makelist5.param4]</fanart>
+]]></listrepeat>
+<expres>class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?</expres>
+<page>http://www.seriespapaya.com/[makelist3.param1]</page>
+</regex>
+class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?
+class="denlace"([^"<]+).*?href="([^"]+).*?
+ <regex>
+<name>makelist4</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist4.param1][/COLOR]</title>
+<urlsolve>[makelist4.param1]</urlsolve>
+<thumbnail></thumbnail>
+<fanart></fanart>
+]]></listrepeat>
+<expres>href='([^"]+).*?</expres>
+<page>[makelist5.param2]</page>
+</regex>
+  </item>
+-----------------------------------------------------------------------------------------------------
+
+<item>
+<title>[COLOR aquamarine]Aftermath[/COLOR]</title>
+  <link>$doregex[makelist3]</link>
+  <thumbnail></thumbnail>
+<fanart></fanart>
+ 
+  <regex>
+<name>makelist3</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist3.param3][/COLOR]</title>
+<link>$doregex[makelist5]</link>
+<thumbnail>[makelist3.param2]</thumbnail>
+<fanart>[makelist3.param2]</fanart>
+]]></listrepeat>
+<expres>a class="visco".*?href="([^"]+).*?img src="([^"]+).*?>&nbsp;([^"<]+).*?</expres>
+<page>http://www.seriespapaya.com/serie/aftermath.html</page>
+</regex>
+ 
+ 
+  <regex>
+<name>makelist5</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist5.param2][/COLOR]</title>
+<link>$doregex[makelist4]</link>
+<thumbnail>[makelist5.param4]</thumbnail>
+<fanart>[makelist5.param4]</fanart>
+]]></listrepeat>
+<expres>class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?</expres>
+<page>http://www.seriespapaya.com/[makelist3.param1]</page>
+</regex>
+class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?
+class="denlace"([^"<]+).*?href="([^"]+).*?
+ <regex>
+<name>makelist4</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist4.param1][/COLOR]</title>
+<urlsolve>[makelist4.param1]</urlsolve>
+<thumbnail></thumbnail>
+<fanart></fanart>
+]]></listrepeat>
+<expres>href='([^"]+).*?</expres>
+<page>[makelist5.param2]</page>
+</regex>
+  </item>
+-----------------------------------------------------------------------------------------------------
+<item>
+<title>[COLOR aquamarine]Are you the One El Match Perfecto[/COLOR]</title>
+  <link>$doregex[makelist3]</link>
+  <thumbnail></thumbnail>
+<fanart></fanart>
+ 
+  <regex>
+<name>makelist3</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist3.param3][/COLOR]</title>
+<link>$doregex[makelist5]</link>
+<thumbnail>[makelist3.param2]</thumbnail>
+<fanart>[makelist3.param2]</fanart>
+]]></listrepeat>
+<expres>a class="visco".*?href="([^"]+).*?img src="([^"]+).*?>&nbsp;([^"<]+).*?</expres>
+<page>http://www.seriespapaya.com/serie/are-you-the-one-el-match-perfecto.html</page>
+</regex>
+ 
+ 
+  <regex>
+<name>makelist5</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist5.param2][/COLOR]</title>
+<link>$doregex[makelist4]</link>
+<thumbnail>[makelist5.param4]</thumbnail>
+<fanart>[makelist5.param4]</fanart>
+]]></listrepeat>
+<expres>class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?</expres>
+<page>http://www.seriespapaya.com/[makelist3.param1]</page>
+</regex>
+class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?
+class="denlace"([^"<]+).*?href="([^"]+).*?
+ <regex>
+<name>makelist4</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist4.param1][/COLOR]</title>
+<urlsolve>[makelist4.param1]</urlsolve>
+<thumbnail></thumbnail>
+<fanart></fanart>
+]]></listrepeat>
+<expres>href='([^"]+).*?</expres>
+<page>[makelist5.param2]</page>
+</regex>
+  </item>
+-----------------------------------------------------------------------------------------------------
+
+<item>
+<title>[COLOR aquamarine]Aqui no hay quien viva[/COLOR]</title>
+  <link>$doregex[makelist3]</link>
+  <thumbnail></thumbnail>
+<fanart></fanart>
+ 
+  <regex>
+<name>makelist3</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist3.param3][/COLOR]</title>
+<link>$doregex[makelist5]</link>
+<thumbnail>[makelist3.param2]</thumbnail>
+<fanart>[makelist3.param2]</fanart>
+]]></listrepeat>
+<expres>a class="visco".*?href="([^"]+).*?img src="([^"]+).*?>&nbsp;([^"<]+).*?</expres>
+<page>http://www.seriespapaya.com/serie/aqui-no-hay-quien-viva.html</page>
+</regex>
+ 
+ 
+  <regex>
+<name>makelist5</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist5.param2][/COLOR]</title>
+<link>$doregex[makelist4]</link>
+<thumbnail>[makelist5.param4]</thumbnail>
+<fanart>[makelist5.param4]</fanart>
+]]></listrepeat>
+<expres>class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?</expres>
+<page>http://www.seriespapaya.com/[makelist3.param1]</page>
+</regex>
+class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?
+class="denlace"([^"<]+).*?href="([^"]+).*?
+ <regex>
+<name>makelist4</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist4.param1][/COLOR]</title>
+<urlsolve>[makelist4.param1]</urlsolve>
+<thumbnail></thumbnail>
+<fanart></fanart>
+]]></listrepeat>
+<expres>href='([^"]+).*?</expres>
+<page>[makelist5.param2]</page>
+</regex>
+  </item>
+-----------------------------------------------------------------------------------------------------
+
+<item>
+<title>[COLOR aquamarine]Agatha Christies Marple[/COLOR]</title>
+  <link>$doregex[makelist3]</link>
+  <thumbnail></thumbnail>
+<fanart></fanart>
+ 
+  <regex>
+<name>makelist3</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist3.param3][/COLOR]</title>
+<link>$doregex[makelist5]</link>
+<thumbnail>[makelist3.param2]</thumbnail>
+<fanart>[makelist3.param2]</fanart>
+]]></listrepeat>
+<expres>a class="visco".*?href="([^"]+).*?img src="([^"]+).*?>&nbsp;([^"<]+).*?</expres>
+<page>http://www.seriespapaya.com/serie/agatha-christies-marple.html</page>
+</regex>
+ 
+ 
+  <regex>
+<name>makelist5</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist5.param2][/COLOR]</title>
+<link>$doregex[makelist4]</link>
+<thumbnail>[makelist5.param4]</thumbnail>
+<fanart>[makelist5.param4]</fanart>
+]]></listrepeat>
+<expres>class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?</expres>
+<page>http://www.seriespapaya.com/[makelist3.param1]</page>
+</regex>
+class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?
+class="denlace"([^"<]+).*?href="([^"]+).*?
+ <regex>
+<name>makelist4</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist4.param1][/COLOR]</title>
+<urlsolve>[makelist4.param1]</urlsolve>
+<thumbnail></thumbnail>
+<fanart></fanart>
+]]></listrepeat>
+<expres>href='([^"]+).*?</expres>
+<page>[makelist5.param2]</page>
+</regex>
+  </item>
+-----------------------------------------------------------------------------------------------------
+
+<item>
+<title>[COLOR aquamarine]Animal Babies[/COLOR]</title>
+  <link>$doregex[makelist3]</link>
+  <thumbnail></thumbnail>
+<fanart></fanart>
+ 
+  <regex>
+<name>makelist3</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist3.param3][/COLOR]</title>
+<link>$doregex[makelist5]</link>
+<thumbnail>[makelist3.param2]</thumbnail>
+<fanart>[makelist3.param2]</fanart>
+]]></listrepeat>
+<expres>a class="visco".*?href="([^"]+).*?img src="([^"]+).*?>&nbsp;([^"<]+).*?</expres>
+<page>http://www.seriespapaya.com/serie/animal-babies.html</page>
+</regex>
+ 
+ 
+  <regex>
+<name>makelist5</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist5.param2][/COLOR]</title>
+<link>$doregex[makelist4]</link>
+<thumbnail>[makelist5.param4]</thumbnail>
+<fanart>[makelist5.param4]</fanart>
+]]></listrepeat>
+<expres>class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?</expres>
+<page>http://www.seriespapaya.com/[makelist3.param1]</page>
+</regex>
+class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?
+class="denlace"([^"<]+).*?href="([^"]+).*?
+ <regex>
+<name>makelist4</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist4.param1][/COLOR]</title>
+<urlsolve>[makelist4.param1]</urlsolve>
+<thumbnail></thumbnail>
+<fanart></fanart>
+]]></listrepeat>
+<expres>href='([^"]+).*?</expres>
+<page>[makelist5.param2]</page>
+</regex>
+  </item>
+-----------------------------------------------------------------------------------------------------
+
+<item>
+<title>[COLOR aquamarine]A mitad de camino del cielo[/COLOR]</title>
+  <link>$doregex[makelist3]</link>
+  <thumbnail></thumbnail>
+<fanart></fanart>
+ 
+  <regex>
+<name>makelist3</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist3.param3][/COLOR]</title>
+<link>$doregex[makelist5]</link>
+<thumbnail>[makelist3.param2]</thumbnail>
+<fanart>[makelist3.param2]</fanart>
+]]></listrepeat>
+<expres>a class="visco".*?href="([^"]+).*?img src="([^"]+).*?>&nbsp;([^"<]+).*?</expres>
+<page>http://www.seriespapaya.com/serie/a-mitad-de-camino-del-cielo.html</page>
+</regex>
+ 
+ 
+  <regex>
+<name>makelist5</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist5.param2][/COLOR]</title>
+<link>$doregex[makelist4]</link>
+<thumbnail>[makelist5.param4]</thumbnail>
+<fanart>[makelist5.param4]</fanart>
+]]></listrepeat>
+<expres>class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?</expres>
+<page>http://www.seriespapaya.com/[makelist3.param1]</page>
+</regex>
+class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?
+class="denlace"([^"<]+).*?href="([^"]+).*?
+ <regex>
+<name>makelist4</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist4.param1][/COLOR]</title>
+<urlsolve>[makelist4.param1]</urlsolve>
+<thumbnail></thumbnail>
+<fanart></fanart>
+]]></listrepeat>
+<expres>href='([^"]+).*?</expres>
+<page>[makelist5.param2]</page>
+</regex>
+  </item>
+-----------------------------------------------------------------------------------------------------
+
+<item>
+<title>[COLOR aquamarine]A Young Doctors Notebook[/COLOR]</title>
+  <link>$doregex[makelist3]</link>
+  <thumbnail></thumbnail>
+<fanart></fanart>
+ 
+  <regex>
+<name>makelist3</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist3.param3][/COLOR]</title>
+<link>$doregex[makelist5]</link>
+<thumbnail>[makelist3.param2]</thumbnail>
+<fanart>[makelist3.param2]</fanart>
+]]></listrepeat>
+<expres>a class="visco".*?href="([^"]+).*?img src="([^"]+).*?>&nbsp;([^"<]+).*?</expres>
+<page>http://www.seriespapaya.com/serie/a-young-doctors-notebook.html</page>
+</regex>
+ 
+ 
+  <regex>
+<name>makelist5</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist5.param2][/COLOR]</title>
+<link>$doregex[makelist4]</link>
+<thumbnail>[makelist5.param4]</thumbnail>
+<fanart>[makelist5.param4]</fanart>
+]]></listrepeat>
+<expres>class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?</expres>
+<page>http://www.seriespapaya.com/[makelist3.param1]</page>
+</regex>
+class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?
+class="denlace"([^"<]+).*?href="([^"]+).*?
+ <regex>
+<name>makelist4</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist4.param1][/COLOR]</title>
+<urlsolve>[makelist4.param1]</urlsolve>
+<thumbnail></thumbnail>
+<fanart></fanart>
+]]></listrepeat>
+<expres>href='([^"]+).*?</expres>
+<page>[makelist5.param2]</page>
+</regex>
+  </item>
+-----------------------------------------------------------------------------------------------------
+
+<item>
+<title>[COLOR aquamarine]A traves del objetivo[/COLOR]</title>
+  <link>$doregex[makelist3]</link>
+  <thumbnail></thumbnail>
+<fanart></fanart>
+ 
+  <regex>
+<name>makelist3</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist3.param3][/COLOR]</title>
+<link>$doregex[makelist5]</link>
+<thumbnail>[makelist3.param2]</thumbnail>
+<fanart>[makelist3.param2]</fanart>
+]]></listrepeat>
+<expres>a class="visco".*?href="([^"]+).*?img src="([^"]+).*?>&nbsp;([^"<]+).*?</expres>
+<page>http://www.seriespapaya.com/serie/a-traves-del-objetivo.html</page>
+</regex>
+ 
+ 
+  <regex>
+<name>makelist5</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist5.param2][/COLOR]</title>
+<link>$doregex[makelist4]</link>
+<thumbnail>[makelist5.param4]</thumbnail>
+<fanart>[makelist5.param4]</fanart>
+]]></listrepeat>
+<expres>class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?</expres>
+<page>http://www.seriespapaya.com/[makelist3.param1]</page>
+</regex>
+class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?
+class="denlace"([^"<]+).*?href="([^"]+).*?
+ <regex>
+<name>makelist4</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist4.param1][/COLOR]</title>
+<urlsolve>[makelist4.param1]</urlsolve>
+<thumbnail></thumbnail>
+<fanart></fanart>
+]]></listrepeat>
+<expres>href='([^"]+).*?</expres>
+<page>[makelist5.param2]</page>
+</regex>
+  </item>
+-----------------------------------------------------------------------------------------------------
+
+<item>
+<title>[COLOR aquamarine]Aventura en pelotas[/COLOR]</title>
+  <link>$doregex[makelist3]</link>
+  <thumbnail></thumbnail>
+<fanart></fanart>
+ 
+  <regex>
+<name>makelist3</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist3.param3][/COLOR]</title>
+<link>$doregex[makelist5]</link>
+<thumbnail>[makelist3.param2]</thumbnail>
+<fanart>[makelist3.param2]</fanart>
+]]></listrepeat>
+<expres>a class="visco".*?href="([^"]+).*?img src="([^"]+).*?>&nbsp;([^"<]+).*?</expres>
+<page>http://www.seriespapaya.com/serie/aventura-en-pelotas.html</page>
+</regex>
+ 
+ 
+  <regex>
+<name>makelist5</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist5.param2][/COLOR]</title>
+<link>$doregex[makelist4]</link>
+<thumbnail>[makelist5.param4]</thumbnail>
+<fanart>[makelist5.param4]</fanart>
+]]></listrepeat>
+<expres>class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?</expres>
+<page>http://www.seriespapaya.com/[makelist3.param1]</page>
+</regex>
+class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?
+class="denlace"([^"<]+).*?href="([^"]+).*?
+ <regex>
+<name>makelist4</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist4.param1][/COLOR]</title>
+<urlsolve>[makelist4.param1]</urlsolve>
+<thumbnail></thumbnail>
+<fanart></fanart>
+]]></listrepeat>
+<expres>href='([^"]+).*?</expres>
+<page>[makelist5.param2]</page>
+</regex>
+  </item>
+-----------------------------------------------------------------------------------------------------
+<item>
+<title>[COLOR aquamarine]A.N.T. Farm Escuela de talentos[/COLOR]</title>
+  <link>$doregex[makelist3]</link>
+  <thumbnail></thumbnail>
+<fanart></fanart>
+ 
+  <regex>
+<name>makelist3</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist3.param3][/COLOR]</title>
+<link>$doregex[makelist5]</link>
+<thumbnail>[makelist3.param2]</thumbnail>
+<fanart>[makelist3.param2]</fanart>
+]]></listrepeat>
+<expres>a class="visco".*?href="([^"]+).*?img src="([^"]+).*?>&nbsp;([^"<]+).*?</expres>
+<page>http://www.seriespapaya.com/serie/ant-farm-escuela-de-talentos.html</page>
+</regex>
+ 
+ 
+  <regex>
+<name>makelist5</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist5.param2][/COLOR]</title>
+<link>$doregex[makelist4]</link>
+<thumbnail>[makelist5.param4]</thumbnail>
+<fanart>[makelist5.param4]</fanart>
+]]></listrepeat>
+<expres>class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?</expres>
+<page>http://www.seriespapaya.com/[makelist3.param1]</page>
+</regex>
+class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?
+class="denlace"([^"<]+).*?href="([^"]+).*?
+ <regex>
+<name>makelist4</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist4.param1][/COLOR]</title>
+<urlsolve>[makelist4.param1]</urlsolve>
+<thumbnail></thumbnail>
+<fanart></fanart>
+]]></listrepeat>
+<expres>href='([^"]+).*?</expres>
+<page>[makelist5.param2]</page>
+</regex>
+  </item>
+-----------------------------------------------------------------------------------------------------
+
+<item>
+<title>[COLOR aquamarine]American Housewife[/COLOR]</title>
+  <link>$doregex[makelist3]</link>
+  <thumbnail></thumbnail>
+<fanart></fanart>
+ 
+  <regex>
+<name>makelist3</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist3.param3][/COLOR]</title>
+<link>$doregex[makelist5]</link>
+<thumbnail>[makelist3.param2]</thumbnail>
+<fanart>[makelist3.param2]</fanart>
+]]></listrepeat>
+<expres>a class="visco".*?href="([^"]+).*?img src="([^"]+).*?>&nbsp;([^"<]+).*?</expres>
+<page>http://www.seriespapaya.com/serie/american-housewife.html</page>
+</regex>
+ 
+ 
+  <regex>
+<name>makelist5</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist5.param2][/COLOR]</title>
+<link>$doregex[makelist4]</link>
+<thumbnail>[makelist5.param4]</thumbnail>
+<fanart>[makelist5.param4]</fanart>
+]]></listrepeat>
+<expres>class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?</expres>
+<page>http://www.seriespapaya.com/[makelist3.param1]</page>
+</regex>
+class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?
+class="denlace"([^"<]+).*?href="([^"]+).*?
+ <regex>
+<name>makelist4</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist4.param1][/COLOR]</title>
+<urlsolve>[makelist4.param1]</urlsolve>
+<thumbnail></thumbnail>
+<fanart></fanart>
+]]></listrepeat>
+<expres>href='([^"]+).*?</expres>
+<page>[makelist5.param2]</page>
+</regex>
+  </item>
+-----------------------------------------------------------------------------------------------------
+
+<item>
+<title>[COLOR aquamarine]Avatar la leyenda de korra[/COLOR]</title>
+  <link>$doregex[makelist3]</link>
+  <thumbnail></thumbnail>
+<fanart></fanart>
+ 
+  <regex>
+<name>makelist3</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist3.param3][/COLOR]</title>
+<link>$doregex[makelist5]</link>
+<thumbnail>[makelist3.param2]</thumbnail>
+<fanart>[makelist3.param2]</fanart>
+]]></listrepeat>
+<expres>a class="visco".*?href="([^"]+).*?img src="([^"]+).*?>&nbsp;([^"<]+).*?</expres>
+<page>http://www.seriespapaya.com/serie/avatar-la-leyenda-de-korra.html</page>
+</regex>
+ 
+ 
+  <regex>
+<name>makelist5</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist5.param2][/COLOR]</title>
+<link>$doregex[makelist4]</link>
+<thumbnail>[makelist5.param4]</thumbnail>
+<fanart>[makelist5.param4]</fanart>
+]]></listrepeat>
+<expres>class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?</expres>
+<page>http://www.seriespapaya.com/[makelist3.param1]</page>
+</regex>
+class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?
+class="denlace"([^"<]+).*?href="([^"]+).*?
+ <regex>
+<name>makelist4</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist4.param1][/COLOR]</title>
+<urlsolve>[makelist4.param1]</urlsolve>
+<thumbnail></thumbnail>
+<fanart></fanart>
+]]></listrepeat>
+<expres>href='([^"]+).*?</expres>
+<page>[makelist5.param2]</page>
+</regex>
+  </item>
+-----------------------------------------------------------------------------------------------------
+
+<item>
+<title>[COLOR aquamarine]Agencia Lovespring[/COLOR]</title>
+  <link>$doregex[makelist3]</link>
+  <thumbnail></thumbnail>
+<fanart></fanart>
+ 
+  <regex>
+<name>makelist3</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist3.param3][/COLOR]</title>
+<link>$doregex[makelist5]</link>
+<thumbnail>[makelist3.param2]</thumbnail>
+<fanart>[makelist3.param2]</fanart>
+]]></listrepeat>
+<expres>a class="visco".*?href="([^"]+).*?img src="([^"]+).*?>&nbsp;([^"<]+).*?</expres>
+<page>http://www.seriespapaya.com/serie/agencia-lovespring.html</page>
+</regex>
+ 
+ 
+  <regex>
+<name>makelist5</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist5.param2][/COLOR]</title>
+<link>$doregex[makelist4]</link>
+<thumbnail>[makelist5.param4]</thumbnail>
+<fanart>[makelist5.param4]</fanart>
+]]></listrepeat>
+<expres>class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?</expres>
+<page>http://www.seriespapaya.com/[makelist3.param1]</page>
+</regex>
+class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?
+class="denlace"([^"<]+).*?href="([^"]+).*?
+ <regex>
+<name>makelist4</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist4.param1][/COLOR]</title>
+<urlsolve>[makelist4.param1]</urlsolve>
+<thumbnail></thumbnail>
+<fanart></fanart>
+]]></listrepeat>
+<expres>href='([^"]+).*?</expres>
+<page>[makelist5.param2]</page>
+</regex>
+  </item>
+-----------------------------------------------------------------------------------------------------
+
+<item>
+<title>[COLOR aquamarine]Aber Bergen[/COLOR]</title>
+  <link>$doregex[makelist3]</link>
+  <thumbnail></thumbnail>
+<fanart></fanart>
+ 
+  <regex>
+<name>makelist3</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist3.param3][/COLOR]</title>
+<link>$doregex[makelist5]</link>
+<thumbnail>[makelist3.param2]</thumbnail>
+<fanart>[makelist3.param2]</fanart>
+]]></listrepeat>
+<expres>a class="visco".*?href="([^"]+).*?img src="([^"]+).*?>&nbsp;([^"<]+).*?</expres>
+<page>http://www.seriespapaya.com/serie/aber-dergen.html</page>
+</regex>
+ 
+ 
+  <regex>
+<name>makelist5</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist5.param2][/COLOR]</title>
+<link>$doregex[makelist4]</link>
+<thumbnail>[makelist5.param4]</thumbnail>
+<fanart>[makelist5.param4]</fanart>
+]]></listrepeat>
+<expres>class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?</expres>
+<page>http://www.seriespapaya.com/[makelist3.param1]</page>
+</regex>
+class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?
+class="denlace"([^"<]+).*?href="([^"]+).*?
+ <regex>
+<name>makelist4</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist4.param1][/COLOR]</title>
+<urlsolve>[makelist4.param1]</urlsolve>
+<thumbnail></thumbnail>
+<fanart></fanart>
+]]></listrepeat>
+<expres>href='([^"]+).*?</expres>
+<page>[makelist5.param2]</page>
+</regex>
+  </item>
+-----------------------------------------------------------------------------------------------------
+
+<item>
+<title>[COLOR aquamarine]A Todo Ritmo (Shake It Up)[/COLOR]</title>
+  <link>$doregex[makelist3]</link>
+  <thumbnail></thumbnail>
+<fanart></fanart>
+ 
+  <regex>
+<name>makelist3</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist3.param3][/COLOR]</title>
+<link>$doregex[makelist5]</link>
+<thumbnail>[makelist3.param2]</thumbnail>
+<fanart>[makelist3.param2]</fanart>
+]]></listrepeat>
+<expres>a class="visco".*?href="([^"]+).*?img src="([^"]+).*?>&nbsp;([^"<]+).*?</expres>
+<page>http://www.seriespapaya.com/serie/a-todo-ritmo.html</page>
+</regex>
+ 
+ 
+  <regex>
+<name>makelist5</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist5.param2][/COLOR]</title>
+<link>$doregex[makelist4]</link>
+<thumbnail>[makelist5.param4]</thumbnail>
+<fanart>[makelist5.param4]</fanart>
+]]></listrepeat>
+<expres>class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?</expres>
+<page>http://www.seriespapaya.com/[makelist3.param1]</page>
+</regex>
+class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?
+class="denlace"([^"<]+).*?href="([^"]+).*?
+ <regex>
+<name>makelist4</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist4.param1][/COLOR]</title>
+<urlsolve>[makelist4.param1]</urlsolve>
+<thumbnail></thumbnail>
+<fanart></fanart>
+]]></listrepeat>
+<expres>href='([^"]+).*?</expres>
+<page>[makelist5.param2]</page>
+</regex>
+  </item>
+-----------------------------------------------------------------------------------------------------
+
+<item>
+<title>[COLOR aquamarine]Autopista hacia el cielo[/COLOR]</title>
+  <link>$doregex[makelist3]</link>
+  <thumbnail></thumbnail>
+<fanart></fanart>
+ 
+  <regex>
+<name>makelist3</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist3.param3][/COLOR]</title>
+<link>$doregex[makelist5]</link>
+<thumbnail>[makelist3.param2]</thumbnail>
+<fanart>[makelist3.param2]</fanart>
+]]></listrepeat>
+<expres>a class="visco".*?href="([^"]+).*?img src="([^"]+).*?>&nbsp;([^"<]+).*?</expres>
+<page>http://www.seriespapaya.com/serie/autopista-hacia-el-cielo.html</page>
+</regex>
+ 
+ 
+  <regex>
+<name>makelist5</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist5.param2][/COLOR]</title>
+<link>$doregex[makelist4]</link>
+<thumbnail>[makelist5.param4]</thumbnail>
+<fanart>[makelist5.param4]</fanart>
+]]></listrepeat>
+<expres>class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?</expres>
+<page>http://www.seriespapaya.com/[makelist3.param1]</page>
+</regex>
+class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?
+class="denlace"([^"<]+).*?href="([^"]+).*?
+ <regex>
+<name>makelist4</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist4.param1][/COLOR]</title>
+<urlsolve>[makelist4.param1]</urlsolve>
+<thumbnail></thumbnail>
+<fanart></fanart>
+]]></listrepeat>
+<expres>href='([^"]+).*?</expres>
+<page>[makelist5.param2]</page>
+</regex>
+  </item>
+-----------------------------------------------------------------------------------------------------
+
+<item>
+<title>[COLOR aquamarine]Au service de la France[/COLOR]</title>
+  <link>$doregex[makelist3]</link>
+  <thumbnail></thumbnail>
+<fanart></fanart>
+ 
+  <regex>
+<name>makelist3</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist3.param3][/COLOR]</title>
+<link>$doregex[makelist5]</link>
+<thumbnail>[makelist3.param2]</thumbnail>
+<fanart>[makelist3.param2]</fanart>
+]]></listrepeat>
+<expres>a class="visco".*?href="([^"]+).*?img src="([^"]+).*?>&nbsp;([^"<]+).*?</expres>
+<page>http://www.seriespapaya.com/serie/au-service-de-la-france.html</page>
+</regex>
+ 
+ 
+  <regex>
+<name>makelist5</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist5.param2][/COLOR]</title>
+<link>$doregex[makelist4]</link>
+<thumbnail>[makelist5.param4]</thumbnail>
+<fanart>[makelist5.param4]</fanart>
+]]></listrepeat>
+<expres>class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?</expres>
+<page>http://www.seriespapaya.com/[makelist3.param1]</page>
+</regex>
+class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?
+class="denlace"([^"<]+).*?href="([^"]+).*?
+ <regex>
+<name>makelist4</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist4.param1][/COLOR]</title>
+<urlsolve>[makelist4.param1]</urlsolve>
+<thumbnail></thumbnail>
+<fanart></fanart>
+]]></listrepeat>
+<expres>href='([^"]+).*?</expres>
+<page>[makelist5.param2]</page>
+</regex>
+  </item>
+-----------------------------------------------------------------------------------------------------
+
+<item>
+<title>[COLOR aquamarine]Apparitions[/COLOR]</title>
+  <link>$doregex[makelist3]</link>
+  <thumbnail></thumbnail>
+<fanart></fanart>
+ 
+  <regex>
+<name>makelist3</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist3.param3][/COLOR]</title>
+<link>$doregex[makelist5]</link>
+<thumbnail>[makelist3.param2]</thumbnail>
+<fanart>[makelist3.param2]</fanart>
+]]></listrepeat>
+<expres>a class="visco".*?href="([^"]+).*?img src="([^"]+).*?>&nbsp;([^"<]+).*?</expres>
+<page>http://www.seriespapaya.com/serie/apparitions.html</page>
+</regex>
+ 
+ 
+  <regex>
+<name>makelist5</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist5.param2][/COLOR]</title>
+<link>$doregex[makelist4]</link>
+<thumbnail>[makelist5.param4]</thumbnail>
+<fanart>[makelist5.param4]</fanart>
+]]></listrepeat>
+<expres>class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?</expres>
+<page>http://www.seriespapaya.com/[makelist3.param1]</page>
+</regex>
+class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?
+class="denlace"([^"<]+).*?href="([^"]+).*?
+ <regex>
+<name>makelist4</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist4.param1][/COLOR]</title>
+<urlsolve>[makelist4.param1]</urlsolve>
+<thumbnail></thumbnail>
+<fanart></fanart>
+]]></listrepeat>
+<expres>href='([^"]+).*?</expres>
+<page>[makelist5.param2]</page>
+</regex>
+  </item>
+-----------------------------------------------------------------------------------------------------
+
+<item>
+<title>[COLOR aquamarine]Automan[/COLOR]</title>
+  <link>$doregex[makelist3]</link>
+  <thumbnail></thumbnail>
+<fanart></fanart>
+ 
+  <regex>
+<name>makelist3</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist3.param3][/COLOR]</title>
+<link>$doregex[makelist5]</link>
+<thumbnail>[makelist3.param2]</thumbnail>
+<fanart>[makelist3.param2]</fanart>
+]]></listrepeat>
+<expres>a class="visco".*?href="([^"]+).*?img src="([^"]+).*?>&nbsp;([^"<]+).*?</expres>
+<page>http://www.seriespapaya.com/serie/automan.html</page>
+</regex>
+ 
+ 
+  <regex>
+<name>makelist5</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist5.param2][/COLOR]</title>
+<link>$doregex[makelist4]</link>
+<thumbnail>[makelist5.param4]</thumbnail>
+<fanart>[makelist5.param4]</fanart>
+]]></listrepeat>
+<expres>class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?</expres>
+<page>http://www.seriespapaya.com/[makelist3.param1]</page>
+</regex>
+class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?
+class="denlace"([^"<]+).*?href="([^"]+).*?
+ <regex>
+<name>makelist4</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist4.param1][/COLOR]</title>
+<urlsolve>[makelist4.param1]</urlsolve>
+<thumbnail></thumbnail>
+<fanart></fanart>
+]]></listrepeat>
+<expres>href='([^"]+).*?</expres>
+<page>[makelist5.param2]</page>
+</regex>
+  </item>
+-----------------------------------------------------------------------------------------------------
+
+<item>
+<title>[COLOR aquamarine]Alfred J Kwak[/COLOR]</title>
+  <link>$doregex[makelist3]</link>
+  <thumbnail></thumbnail>
+<fanart></fanart>
+ 
+  <regex>
+<name>makelist3</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist3.param3][/COLOR]</title>
+<link>$doregex[makelist5]</link>
+<thumbnail>[makelist3.param2]</thumbnail>
+<fanart>[makelist3.param2]</fanart>
+]]></listrepeat>
+<expres>a class="visco".*?href="([^"]+).*?img src="([^"]+).*?>&nbsp;([^"<]+).*?</expres>
+<page>http://www.seriespapaya.com/serie/alfred-j-kwak.html</page>
+</regex>
+ 
+ 
+  <regex>
+<name>makelist5</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist5.param2][/COLOR]</title>
+<link>$doregex[makelist4]</link>
+<thumbnail>[makelist5.param4]</thumbnail>
+<fanart>[makelist5.param4]</fanart>
+]]></listrepeat>
+<expres>class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?</expres>
+<page>http://www.seriespapaya.com/[makelist3.param1]</page>
+</regex>
+class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?
+class="denlace"([^"<]+).*?href="([^"]+).*?
+ <regex>
+<name>makelist4</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist4.param1][/COLOR]</title>
+<urlsolve>[makelist4.param1]</urlsolve>
+<thumbnail></thumbnail>
+<fanart></fanart>
+]]></listrepeat>
+<expres>href='([^"]+).*?</expres>
+<page>[makelist5.param2]</page>
+</regex>
+  </item>
+-----------------------------------------------------------------------------------------------------
+
+<item>
+<title>[COLOR aquamarine]Atomic Puppet[/COLOR]</title>
+  <link>$doregex[makelist3]</link>
+  <thumbnail></thumbnail>
+<fanart></fanart>
+ 
+  <regex>
+<name>makelist3</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist3.param3][/COLOR]</title>
+<link>$doregex[makelist5]</link>
+<thumbnail>[makelist3.param2]</thumbnail>
+<fanart>[makelist3.param2]</fanart>
+]]></listrepeat>
+<expres>a class="visco".*?href="([^"]+).*?img src="([^"]+).*?>&nbsp;([^"<]+).*?</expres>
+<page>http://www.seriespapaya.com/serie/atomic-puppet.html</page>
+</regex>
+ 
+ 
+  <regex>
+<name>makelist5</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist5.param2][/COLOR]</title>
+<link>$doregex[makelist4]</link>
+<thumbnail>[makelist5.param4]</thumbnail>
+<fanart>[makelist5.param4]</fanart>
+]]></listrepeat>
+<expres>class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?</expres>
+<page>http://www.seriespapaya.com/[makelist3.param1]</page>
+</regex>
+class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?
+class="denlace"([^"<]+).*?href="([^"]+).*?
+ <regex>
+<name>makelist4</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist4.param1][/COLOR]</title>
+<urlsolve>[makelist4.param1]</urlsolve>
+<thumbnail></thumbnail>
+<fanart></fanart>
+]]></listrepeat>
+<expres>href='([^"]+).*?</expres>
+<page>[makelist5.param2]</page>
+</regex>
+  </item>
+-----------------------------------------------------------------------------------------------------
+
+<item>
+<title>[COLOR aquamarine]Antes que sea tarde (Before the flood)[/COLOR]</title>
+  <link>$doregex[makelist3]</link>
+  <thumbnail></thumbnail>
+<fanart></fanart>
+ 
+  <regex>
+<name>makelist3</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist3.param3][/COLOR]</title>
+<link>$doregex[makelist5]</link>
+<thumbnail>[makelist3.param2]</thumbnail>
+<fanart>[makelist3.param2]</fanart>
+]]></listrepeat>
+<expres>a class="visco".*?href="([^"]+).*?img src="([^"]+).*?>&nbsp;([^"<]+).*?</expres>
+<page>http://www.seriespapaya.com/serie/antes-que-sea-tarde.html</page>
+</regex>
+ 
+ 
+  <regex>
+<name>makelist5</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist5.param2][/COLOR]</title>
+<link>$doregex[makelist4]</link>
+<thumbnail>[makelist5.param4]</thumbnail>
+<fanart>[makelist5.param4]</fanart>
+]]></listrepeat>
+<expres>class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?</expres>
+<page>http://www.seriespapaya.com/[makelist3.param1]</page>
+</regex>
+class="denlace"([^"<]+).*?href="([^"]+).*?target="_blank"([^<"]+).*?img src="([^"]+).*?
+class="denlace"([^"<]+).*?href="([^"]+).*?
+ <regex>
+<name>makelist4</name>
+<listrepeat><![CDATA[
+<SetwatchMode>55</SetwatchMode>
+<title>[COLOR white][makelist4.param1][/COLOR]</title>
+<urlsolve>[makelist4.param1]</urlsolve>
+<thumbnail></thumbnail>
+<fanart></fanart>
+]]></listrepeat>
+<expres>href='([^"]+).*?</expres>
+<page>[makelist5.param2]</page>
+</regex>
+  </item>
+
+
+
+<item>
+      <title> [COLOR blue] Policías en Acción[/COLOR]</title>
+  <thumbnail>https://pbs.twimg.com/profile_images/378800000105615688/43f10643d756612183a4f23af9a47dd1_400x400.jpeg</thumbnail>
+<fanart>https://pbs.twimg.com/profile_images/378800000105615688/43f10643d756612183a4f23af9a47dd1_400x400.jpeg</fanart>
+<link>http://ignoreme</link>
+   <externallink>http://oqefuh.blogspot.com.es/p/series-policia-en-accion.html</externallink>
+</item>
+
+<item>
+      <title> [COLOR blue] blacklist[/COLOR]</title>
+  <thumbnail>http://www.seriespapaya.com/uploads/The-Blacklist26.jpg</thumbnail>
+<fanart>http://www.seriespapaya.com/uploads/The-Blacklist26.jpg</fanart>
+<link>http://ignoreme</link>
+   <externallink>http://oqefuh.blogspot.com.es/p/series-black-list.html</externallink>
+</item>
+
+
+<item>
+      <title> [COLOR blue] Mr. Rotot[/COLOR]</title>
+  <thumbnail>https://tse1.mm.bing.net/th?id=OIP.8DaO06nIId8IZfmioe1_kwDKEs&pid=15.1&P=0&w=300&h=300</thumbnail>
+<fanart>https://tse1.mm.bing.net/th?id=OIP.8DaO06nIId8IZfmioe1_kwDKEs&pid=15.1&P=0&w=300&h=300</fanart>
+<link>http://ignoreme</link>
+   <externallink>http://oqefuh.blogspot.com.es/p/series-mr-robot.html</externallink>
+</item>
+
+
+<item>
+      <title> [COLOR blue] Así se hace[/COLOR]</title>
+  <thumbnail>https://cdn2.plusdede.com/cdn/media/serie/2/6/4/7-medium.jpg?v=0</thumbnail>
+<fanart>https://cdn2.plusdede.com/cdn/media/serie/2/6/4/7-medium.jpg?v=0</fanart>
+<link>http://ignoreme</link>
+   <externallink>http://oqefuh.blogspot.com.es/p/series-asi-se-hace.html</externallink>
+</item>
+
+<item>
+<title> [COLOR blue] Narcos[/COLOR]</title>
+<thumbnail>http://ayayay.tv/wp-content/uploads/2015/10/narcos.jpg</thumbnail>
+<fanart>https://okdiario.com/series/img/2016/09/07/narcos-12.jpg</fanart>
+<link>http://ignoreme</link>
+<externallink>https://pastebin.com/raw/M8waMDaB</externallink>
+</item>
+ 
+<item>
+<title> [COLOR blue] The Last kingdom[/COLOR]</title>
+<link>ignorame</link>
+ <externallink>https://pastebin.com/raw/jTe5NzpL</externallink>
+<thumbnail>http://cdn-static.sidereel.com/tv_shows/58198/giant_2x/last_kingdom.jpg</thumbnail>
+<fanart></fanart>
+</item>
+ 
+<item>
+<title> [COLOR blue] Trece Razones[/COLOR]</title>
+<link>ignorame</link>
+<externallink>https://pastebin.com/raw/M4Z0inqh</externallink>
+<thumbnail>http://www.abc.es/media/play/2017/01/25/13ReasonsWhy_SPA-0191-k0hG-U202323256675GAG-510x700@abc.jpg</thumbnail>
+<fanart></fanart>
+</item>
+ 
+<item>
+<title> [COLOR blue] Vikings[/COLOR]</title>
+<link>http://ignoreme</link>
+<externallink>https://pastebin.com/raw/GNi3A6qY</externallink>
+<thumbnail>http://solopormega.com/wp-content/uploads/2015/07/vikings.jpg</thumbnail>
+<fanart></fanart>
+</item>
+ 
+<item>
+<title> [COLOR blue] Fear The Walking Dead[/COLOR]</title>
+<thumbnail>https://i.imgur.com/3kGjiUt.png</thumbnail>
+<fanart></fanart>
+<link>http://ignoreme</link>
+<externallink>https://pastebin.com/raw/59ThUnyA</externallink>
+</item> 
+
+<item>
+<title> [COLOR blue] Iron First[/COLOR]</title>
+<link>ignorame</link>
+ <externallink>https://pastebin.com/raw/dPNQ40jG</externallink>
+<thumbnail>http://solopormega.com/wp-content/uploads/2017/03/iron-fist.jpg</thumbnail>
+<fanart></fanart>
+</item> 
+ 
+<item>
+<title> [COLOR blue] ShadowHunters[/COLOR]</title>
+<link>ignorame</link>
+ <externallink>https://pastebin.com/raw/gQFkKQUA</externallink>
+<thumbnail>https://s3.amazonaws.com/media.muckrack.com/profile/images/701960/shadowhuntersjpg.256x256_q100_crop-smart.jpg</thumbnail>
+<fanart></fanart>
+</item>
+
+<item>
+<title>[COLOR blue] Encarcelados[/COLOR]</title>
+<thumbnail>http://www.atresplayer.com/clipping/2013/09/11/00405/705.jpg</thumbnail>
+<fanart>http://www.atresplayer.com/clipping/2013/09/11/00405/705.jpg</fanart>
+<link>http://ignoreme</link>
+<externallink>https://raw.githubusercontent.com/RetroBlogPi/MagicPi/master/encarce.xml</externallink>
+</item>
+
+
+
+<item>
+<title>[COLOR blue] Casados a primera vista ( 4 temporada )[/COLOR]</title>
+<thumbnail>https://okdiario.com/yotele/wp-content/uploads/2016/12/28/81190_370-1-655x368.png</thumbnail>
+<fanart>http://fotografias.antena3.com/clipping/cmsimages01/2018/01/05/7FE7B71E-AA3F-4F48-9043-82348FEA1DA5/58.jpg</fanart>
+<link>http://ignoreme</link>
+<externallink>https://raw.githubusercontent.com/RetroBlogPi/MagicPi/master/casados.xml</externallink>
+</item>
+
+
+
+<item>
+<title>[COLOR blue] Joyas Sobre Ruedas[/COLOR]</title>
+<thumbnail>https://s-media-cache-ak0.pinimg.com/originals/af/18/35/af183559c310a25460ad7b9caf2cf251.jpg</thumbnail>
+<fanart>https://i.imgur.com/ASkRBmu.jpg</fanart>
+<link>http://ignoreme</link>
+<externallink>https://raw.githubusercontent.com/RetroBlogPi/MagicPi/master/joyas.xml</externallink>
+</item>
+
+<item>
+<title>[COLOR blue] Fast And Loud(GasMonkeys)[/COLOR]</title>
+<thumbnail>http://www.dmax.marca.com/content/dam/discovery/seur/es/dmax/2015/01/fast_loudficha.jpg</thumbnail>
+<fanart>https://mms.businesswire.com/media/20160901005412/en/542162/5/RichardRawlingsDickies.jpg</fanart>
+<link>http://ignoreme</link>
+<externallink>https://raw.githubusercontent.com/RetroBlogPi/MagicPi/master/gasmonkeys.xml</externallink>
+</item>
+
+
+
+<item>
+<title>[COLOR blue] Control de Aduanas : Nueva Zelanda[/COLOR]</title>
+<thumbnail>https://i.imgur.com/apU2VHY.png</thumbnail>
+<fanart>https://i.imgur.com/CQ40sDF.jpg</fanart>
+<link>http://ignoreme</link>
+<externallink>https://raw.githubusercontent.com/RetroBlogPi/MagicPi/master/controlnueva.xml</externallink>
+</item>
+
+
+<item>
+<title>[COLOR blue] Aventura en Pelotas XXL[/COLOR]</title>
+<thumbnail>https://i.imgur.com/ycFBh7l.png</thumbnail>
+<fanart>https://i.imgur.com/wd3R14Y.jpg</fanart>
+<link>http://ignoreme</link>
+<externallink>https://raw.githubusercontent.com/RetroBlogPi/MagicPi/master/avenpexl.xml</externallink>
+</item>
+
+<item>
+<title>[COLOR blue] TOP GEAR[/COLOR]</title>
+<thumbnail>ttp://www.seriespapaya.com/uploads/Top-Gear-Ambitious-But-Rubbish20.jpg</thumbnail>
+<fanart>https://images-na.ssl-images-amazon.com/images/I/81x7hR3mhlL._RI_.jpg</fanart>
+<link>http://ignoreme</link>
+<externallink>https://pastebin.com/raw/cPXrzEDg</externallink>
+</item>
+
+<item>
+<title>[COLOR blue] Empeños A Lo Bestia[/COLOR]</title>
+<thumbnail>https://portadas.seriesgato.com/empenos-a-lo-bestia-183831-p-200x294.jpg</thumbnail>
+<fanart>http://fotografias.mega.atresmedia.com/clipping/cmsimages02/2016/05/18/4BFE5F1E-0B1D-4A1B-BA83-52F30152B818/57.jpg</fanart>
+<link>http://ignoreme</link>
+<externallink>https://pastebin.com/raw/g3u1KrsH</externallink>
+</item>
+
+<item>
+<title>[COLOR blue] como conocí a vuestra madre[/COLOR]</title>
+<thumbnail>https://i.imgur.com/8vZ70u6.png</thumbnail>
+<fanart>https://i.imgur.com/OxQhRzm.jpg</fanart>
+<link>http://ignoreme</link>
+<externallink>https://pastebin.com/raw/MWt5R63B</externallink>
+</item>
+
+
+<item>
+<title>[COLOR blue] Acuarios XXL[/COLOR]</title>
+<thumbnail>https://i.imgur.com/KlSxmIG.jpg</thumbnail>
+<fanart>https://imgur.com/Q0JRu98</fanart>
+<link>http://ignoreme</link>
+<externallink>https://pastebin.com/raw/XZeRKbTr</externallink>
+</item>
+
+<item>
+<title>[COLOR blue] La Que Se Avecina[/COLOR]</title>
+<thumbnail>http://www.formulatv.com/fotos/a/129000/129366/01pso8j8k6539syiqq4b3a31d9ab70f_la-que-se-avecina.jpg</thumbnail>
+<fanart>http://www.formulatv.com/fotos/a/129000/129366/01pso8j8k6539syiqq4b3a31d9ab70f_la-que-se-avecina.jpg</fanart>
+<link>http://ignoreme</link>
+<externallink>https://pastebin.com/raw/tdsJVuX9</externallink>
+</item>
+
+
+<item>
+<title>[COLOR blue] Seven Seconds[/COLOR]</title>
+<thumbnail>http://www.blackfilm.com/read/wp-content/uploads/2017/12/Seven-Seconds-poster.jpg</thumbnail>
+<fanart>http://www.blackfilm.com/read/wp-content/uploads/2017/12/Seven-Seconds-poster.jpg</fanart>
+<link>http://ignoreme</link>
+<externallink>https://pastebin.com/raw/wHb8ngAi</externallink>
+</item>
